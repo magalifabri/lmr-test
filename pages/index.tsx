@@ -7,18 +7,18 @@ import styles from "../styles/Home.module.scss";
 
 export default function Home() {
     return (
-        <div>
+        <>
             <Head>
                 <title>page title</title>
                 <meta name="description" content="page description" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="container">
+            <div className={styles.container}>
                 <Sidebar />
 
                 <Quiz />
             </div>
-        </div>
+        </>
     );
 }

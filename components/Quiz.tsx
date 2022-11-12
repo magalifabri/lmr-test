@@ -1,3 +1,5 @@
+import styles from "../styles/Quiz.module.scss";
+
 export default function Quiz() {
     return (
         <div className="quiz-window">

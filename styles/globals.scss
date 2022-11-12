@@ -2,8 +2,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
+    // remove after creating UI
+    border: 1px solid red;
 }
 
+// TODO: remove after recreating UI
 html:before {
     content: "";
     background: url("/images/quiz-active_answers.png");
@@ -12,5 +16,5 @@ html:before {
     height: 100%;
     position: absolute;
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.75;
 }

@@ -1,24 +1,29 @@
+import Image from "next/image";
+import styles from "../styles/Sidebar.module.scss";
+
 export default function Sidebar() {
     return (
-        <div className="sidebar">
-            <div className="intro">
-                <div className="cover">
-                    <div className="info">
-                        <div className="timer">31:55</div>
-                        {/* <div className="progress-bar">
-                                    (progress bar)
-                                </div> */}
+        <div className={styles.container}>
+            <div className={styles.intro}>
+                <div className={styles.cover}>
+                    <div className={styles.info}>
+                        <div className={styles.timer}>(icon) 31:55</div>
 
-                        <div className="level">
-                            <div className="bar"></div>
-                            Level 3 / 10
+                        <div className={styles.level}>
+                            <div className={styles.progressBar}>
+                                (progress bar)
+                            </div>
+                            <span>Level 3 / 10</span>
                         </div>
                     </div>
 
-                    <div className="avatar">IMG:avatar</div>
+                    <div className={styles.avatarContainer}>
+                        <div className={styles.avatarForeground}></div>
+                        <div className={styles.avatarBackground}></div>
+                    </div>
                 </div>
 
-                <div className="text">
+                <div className={styles.text}>
                     <h1>De fabriek</h1>
                 </div>
 
@@ -35,7 +40,7 @@ export default function Sidebar() {
                 </p>
             </div>
 
-            <div className="navigation">
+            <div className={styles.navigation}>
                 <button>?</button>
                 <button>r</button>
                 <button>m</button>
