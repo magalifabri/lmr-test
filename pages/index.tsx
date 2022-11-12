@@ -2,10 +2,23 @@ import Head from "next/head";
 
 import Sidebar from "../components/Sidebar";
 import Quiz from "../components/Quiz";
+import IQuizData from "../interfaces/IQuizData";
 
 import styles from "../styles/Home.module.scss";
 
-export default function Home() {
+// fetch quiz data from API
+export async function getServerSideProps() {
+    const res = await fetch(`https://lab.lfwd.be/dev-test/quiz_data.json`);
+    const quizData = await res.json();
+
+    return { props: { quizData } };
+}
+
+type AppProps = {
+    quizData: IQuizData[];
+};
+
+export default function Home({ quizData }: AppProps) {
     return (
         <>
             <Head>
