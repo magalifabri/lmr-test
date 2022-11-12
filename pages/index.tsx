@@ -36,7 +36,7 @@ export default function Home({ quizData }: AppProps) {
             <div className={styles.container}>
                 <Sidebar />
 
-                <Quiz />
+                <Quiz quizData={quizData[0]} />
             </div>
         </>
     );

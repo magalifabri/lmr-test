@@ -1,6 +1,11 @@
 import styles from "../styles/Quiz.module.scss";
+import IQuizData from "../interfaces/IQuizData";
 
-export default function Quiz() {
+type AppProps = {
+    quizData: IQuizData;
+};
+
+export default function Quiz({ quizData }: AppProps) {
     return (
         <div className={styles.container}>
             <div className={styles.timer}>
@@ -11,9 +16,15 @@ export default function Quiz() {
                 [0:20]
             </div>
 
-            <h1 className={styles.question}>[question]</h1>
+            <h1 className={styles.question}>{quizData.question}</h1>
 
-            <div className={styles.options}>[options]</div>
+            <div className={styles.options}>
+                {quizData.answers.map((answer) => (
+                    <button className={styles.optionButton} key={answer.uid}>
+                        {answer.answer}
+                    </button>
+                ))}
+            </div>
 
             <button className={styles.bigButton}>Klaar!</button>
             <button className={styles.bigButton}>Geef me een tip...</button>
