@@ -25,19 +25,20 @@ export default function Sidebar() {
 
                 <div className={styles.text}>
                     <h1>De fabriek</h1>
+
+                    <hr className={styles.line} />
+
+                    <p>
+                        Aha, je bent terug! Net op tijd: Onze eerste bestelling
+                        is binnen. Een lokale school wil haar studenten
+                        vegetarische lunch maaltijden aanbieden. Stel de
+                        machines in voor...
+                    </p>
+                    <p>
+                        Een gezonde <b>vegetarische</b> pizza met 7 gepaste
+                        ingrediënten.
+                    </p>
                 </div>
-
-                <hr />
-
-                <p>
-                    Aha, je bent terug! Net op tijd: Onze eerste bestelling is
-                    binnen. Een lokale school wil haar studenten vegetarische
-                    lunch maaltijden aanbieden. Stel de machines in voor...
-                </p>
-                <p>
-                    Een gezonde <b>vegetarische</b> pizza met 7 gepaste
-                    ingrediënten.
-                </p>
             </div>
 
             <div className={styles.navigation}>
