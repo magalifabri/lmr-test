@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { v4 as uuid } from "uuid";
 
 import Sidebar from "../components/Sidebar";
 import Quiz from "../components/Quiz";
@@ -10,6 +11,11 @@ import styles from "../styles/Home.module.scss";
 export async function getServerSideProps() {
     const res = await fetch(`https://lab.lfwd.be/dev-test/quiz_data.json`);
     const quizData = await res.json();
+
+    // add uid to answers to use as key prop
+    quizData.map((entry: IQuizData) => {
+        entry.answers.map((answer) => (answer = { ...answer, uid: uuid() }));
+    });
 
     return { props: { quizData } };
 }
