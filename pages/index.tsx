@@ -1,4 +1,8 @@
 import Head from "next/head";
+
+import Sidebar from "../components/Sidebar";
+import Quiz from "../components/Quiz";
+
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -10,7 +14,11 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <p>Hello world</p>
+            <div className="container">
+                <Sidebar />
+
+                <Quiz />
+            </div>
         </div>
     );
 }
