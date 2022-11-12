@@ -3,7 +3,7 @@ import Head from "next/head";
 import Sidebar from "../components/Sidebar";
 import Quiz from "../components/Quiz";
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 
 export default function Home() {
     return (
