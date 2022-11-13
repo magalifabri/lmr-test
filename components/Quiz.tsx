@@ -1,18 +1,22 @@
 import styles from "../styles/Quiz.module.scss";
 import IQuizData from "../interfaces/IQuizData";
+import { GamePhase } from "../pages/index";
 
 type AppProps = {
     quizData: IQuizData;
+    gamePhase: GamePhase;
 };
 
-export default function Quiz({ quizData }: AppProps) {
-    const timerStarted = true;
-
+export default function Quiz({ quizData, gamePhase }: AppProps) {
     return (
         <div className={styles.container}>
             <div className={styles.innerContainer}>
                 <div className={styles.timerContainer}>
-                    {timerStarted ? (
+                    {gamePhase === GamePhase.PRE_SELECTION ? (
+                        <div className={styles.countdownBar}>
+                            <div className={styles.countdownBar__fill}></div>
+                        </div>
+                    ) : (
                         <div className={styles.stopwatch}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -23,20 +27,23 @@ export default function Quiz({ quizData }: AppProps) {
                             </svg>
                             0:20
                         </div>
-                    ) : (
-                        <div className={styles.countdownBar}>
-                            <div className={styles.countdownBar__fill}></div>
-                        </div>
                     )}
                 </div>
 
                 <h1 className={styles.question}>{quizData.question}</h1>
 
-                <div className={styles.options}>
+                <div
+                    className={`${styles.options} ${
+                        gamePhase === GamePhase.PRE_SELECTION
+                            ? styles.options__hidden
+                            : styles.undef
+                    }`}
+                >
                     {quizData.answers.map((answer) => (
                         <button
                             className={`${styles.optionButton}`}
                             key={answer.uid}
+                            disabled={gamePhase === GamePhase.PRE_SELECTION}
                         >
                             {answer.answer}
                         </button>
