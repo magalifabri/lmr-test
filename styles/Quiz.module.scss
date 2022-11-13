@@ -1,19 +1,21 @@
 @use "shared";
 
 .container {
+    flex: 1;
     padding: 1rem;
 
-    flex: 1;
-
-    // background-color: shared.$primaryLighter1;
+    background-color: shared.$primaryLighter1;
     border-radius: 1rem;
+
+    display: flex;
 }
 
 .innerContainer {
+    flex: 1;
     padding: 0.5rem 2.75rem;
 
     border-radius: 0.5rem;
-    // background-color: shared.$primaryDarker1;
+    background-color: shared.$primaryDarker1;
 
     display: flex;
     flex-direction: column;
@@ -26,7 +28,7 @@
     padding-left: 1.125rem;
     margin-bottom: 1.5rem;
 
-    // background-color: shared.$white;
+    background-color: shared.$white;
     border-radius: 3rem;
     @include shared.boxShadow(shared.$primary);
 
