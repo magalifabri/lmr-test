@@ -121,6 +121,7 @@
         background-color: shared.$primaryLighter1;
         color: shared.$white;
     }
+
     &.selected {
         border-color: shared.$accent;
         background-color: shared.$primaryLighter2;
@@ -165,7 +166,7 @@
         // }
     }
 
-    &__disabled {
+    &:disabled {
         background-color: shared.$grayLighter1;
         @include shared.boxShadow(shared.$gray);
     }

@@ -112,7 +112,10 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
                 </div>
 
                 <button
-                    className={`${styles.bigButton} ${styles.bigButton__disabled}`}
+                    disabled={!selectedOptions.length}
+                    className={`${styles.bigButton} ${
+                        selectedOptions.length ? styles.bigButton__yellow : ""
+                    }`}
                 >
                     Klaar!
                 </button>
