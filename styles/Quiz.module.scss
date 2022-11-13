@@ -60,12 +60,23 @@
     margin-top: 1.5rem;
 
     border-radius: 0.15rem;
+    overflow: hidden;
     background-color: shared.$primaryLighter1;
 
     &__fill {
-        width: 75%;
         height: 100%;
         background-color: shared.$accent;
+
+        animation: deplete 10s linear both;
+
+        @keyframes deplete {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0%;
+            }
+        }
     }
 }
 
