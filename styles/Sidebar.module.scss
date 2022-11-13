@@ -19,9 +19,11 @@
     padding: 0.375rem;
     position: relative;
 
-    // background-image: url("/images/background.png");
-    background-size: 155%;
-    background-position: 80% 50%;
+    $color: rgba(89, 118, 142, 0.7);
+    background-image: linear-gradient($color, $color),
+        url("/images/background.png");
+    background-size: 160%;
+    background-position: 75% 50%;
 }
 
 .info {
