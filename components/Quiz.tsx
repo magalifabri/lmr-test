@@ -16,6 +16,7 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
     );
     const [intervalId, setIntervalId] =
         useState<ReturnType<typeof setInterval>>();
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
     //#endregion
 
     //#region USE EFFECTS
@@ -38,6 +39,23 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
             console.log("time's up!");
         }
     }, [secondsRemaining]);
+
+    useEffect(() => {
+        console.log(selectedOptions);
+    }, [selectedOptions]);
+    //#endregion
+
+    //#region UI HANDLERS
+
+    const onAnswerSelect = (answerUid: string) => {
+        if (selectedOptions.includes(answerUid)) {
+            const newSelectedOptions = selectedOptions;
+            newSelectedOptions.splice(selectedOptions.indexOf(answerUid), 1);
+            setSelectedOptions([...newSelectedOptions]);
+        } else {
+            setSelectedOptions((prevState) => [...prevState, answerUid]);
+        }
+    };
     //#endregion
 
     return (
@@ -76,9 +94,17 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
                 >
                     {quizData.answers.map((answer) => (
                         <button
-                            className={`${styles.optionButton}`}
+                            className={`${styles.optionButton} ${
+                                selectedOptions.includes(answer.uid)
+                                    ? styles.selected
+                                    : ""
+                            }`}
                             key={answer.uid}
                             disabled={gamePhase === GamePhase.PRE_SELECTION}
+                            id={answer.uid}
+                            onClick={(e) => {
+                                onAnswerSelect((e.target as HTMLElement).id);
+                            }}
                         >
                             {answer.answer}
                         </button>
