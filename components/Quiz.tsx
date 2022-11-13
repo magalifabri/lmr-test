@@ -33,7 +33,12 @@ export default function Quiz({ quizData }: AppProps) {
                     ))}
                 </div>
 
-                <button className={styles.bigButton}>Klaar!</button>
+                <button
+                    className={`${styles.bigButton} ${styles.bigButton__disabled}`}
+                >
+                    Klaar!
+                </button>
+
                 <button className={styles.bigButton}>Geef me een tip...</button>
                 {/* <button>Doorgaan</button> */}
             </div>
