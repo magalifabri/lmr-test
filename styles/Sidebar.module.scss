@@ -1,3 +1,5 @@
+@use "shared";
+
 .container {
     width: 375px;
     padding: 1rem;
@@ -23,17 +25,54 @@
 }
 
 .info {
+    height: 2rem;
     display: flex;
     gap: 0.5rem;
 }
 
+.timer,
+.level {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    color: shared.$white;
+    font-weight: bold;
+
+    background-color: shared.$primaryLighter2;
+    border-radius: shared.$borderRadiusSmaller1;
+    @include shared.boxShadow(shared.$primary);
+}
+
+.timer {
+    padding: 0 0.5rem;
+    width: 5.25rem;
+
+    svg {
+        height: 1rem;
+        fill: currentColor;
+    }
+}
+
 .level {
     flex: 1;
-    display: flex;
+    padding: 4px;
 }
 
 .progressBar {
-    flex: 1;
+    width: 55%;
+    height: 100%;
+
+    background-color: shared.$primaryLighter1;
+    border-radius: shared.$borderRadiusSmaller1;
+
+    &__fill {
+        width: 20%;
+        height: 100%;
+
+        background-color: shared.$accent;
+        border-radius: inherit;
+    }
 }
 
 .avatarContainer {

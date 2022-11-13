@@ -1,3 +1,5 @@
+// #region COLORS
+
 $primaryLighter4: #c2e2fe;
 $primaryLighter3: #b0e1f3;
 $primaryLighter2: #2d89cc;
@@ -16,3 +18,17 @@ $gray: #9097a0;
 
 $green: #38cf1f;
 $red: #cf1f1f;
+// #endregion
+
+// #region VARIABLES
+
+$borderRadiusSmaller1: 5px;
+$borderRadius: 7px;
+// #endregion
+
+// #region MIXINS
+
+@mixin boxShadow($color) {
+    box-shadow: 0 4px 0 $color;
+}
+// #endregion
