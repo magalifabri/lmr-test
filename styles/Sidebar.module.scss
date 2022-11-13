@@ -118,17 +118,24 @@
 }
 
 .text {
-    flex: 1;
     padding: 1rem;
-    padding-top: 2.5rem;
+    padding-top: 3rem;
     text-align: center;
+    color: shared.$primary;
 
     p {
-        padding-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        font-size: 1.125rem;
+        line-height: 1.375;
+    }
+
+    b {
+        font-weight: 500;
     }
 }
 
 .line {
+    border: none;
     border-top: 2px solid #2d89cc;
     width: 33%;
     margin: 0.75rem auto 1rem;
