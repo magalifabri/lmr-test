@@ -24,10 +24,11 @@
     width: 7rem;
     height: 2.75rem;
     padding-left: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 
     // background-color: shared.$white;
     border-radius: 3rem;
+    @include shared.boxShadow(shared.$primary);
 
     color: shared.$primary;
     font-weight: bold;
