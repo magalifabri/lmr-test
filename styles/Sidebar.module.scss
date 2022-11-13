@@ -147,11 +147,13 @@
 }
 
 .button {
-    height: 52px;
+    height: 48px;
     width: 52px;
 
-    background-color: #0044755c;
+    background-color: #004475;
     border: none;
+    border-radius: shared.$borderRadius;
+    @include shared.boxShadow(shared.$primaryDarker1);
 
     display: grid;
     place-items: center;
@@ -165,18 +167,21 @@
 
 .bigButton {
     flex: 1;
-    height: 52px;
+    height: 48px;
+
+    background-color: #ffe100;
+    border: none;
+    border-radius: shared.$borderRadius;
+    @include shared.boxShadow(shared.$accentDarker2);
 
     color: #004475;
-    background-color: #ffe10078;
-    border: none;
 
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 
     svg {
-        max-height: 20px;
+        height: 20px;
         fill: currentColor;
     }
 }
