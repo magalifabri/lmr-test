@@ -27,8 +27,12 @@ export default function Sidebar() {
                     </div>
 
                     <div className={styles.avatarContainer}>
-                        <div className={styles.avatarForeground}></div>
-                        <div className={styles.avatarBackground}></div>
+                        <div
+                            className={`${styles.avatar} ${styles.avatar__foreground}`}
+                        ></div>
+                        <div
+                            className={`${styles.avatar} ${styles.avatar__background}`}
+                        ></div>
                     </div>
                 </div>
 

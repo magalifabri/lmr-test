@@ -85,26 +85,27 @@
     left: 50%;
     top: 30%;
     transform: translate(-50%, 15%);
+}
 
-    .avatarForeground {
+.avatar {
+    background-image: url("/images/avatar.png");
+    background-repeat: no-repeat;
+    background-position: 50% 5px;
+    border-radius: 50%;
+    background-color: #b0e1f3;
+
+    &__foreground {
+        margin: 0 auto;
+
         height: 95%;
         width: 95%;
 
-        margin: 0 auto;
-
-        background-image: url("/images/avatar.png");
-        background-repeat: no-repeat;
         background-size: 95%;
-        background-position: 50% 5px;
 
-        border-radius: 50%;
-        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.295);
-
-        background-color: #b0e1f3;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     }
-
-    .avatarBackground {
-        opacity: 0.2;
+    &__background {
+        opacity: 0.15;
         position: absolute;
         top: 0;
         z-index: -1;
@@ -112,15 +113,7 @@
         height: 100%;
         width: 100%;
 
-        background-image: url("/images/avatar.png");
-        background-repeat: no-repeat;
         background-size: 90%;
-        background-position: 50% 5px;
-
-        border-radius: 50%;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.295);
-
-        background-color: #b0e1f3;
     }
 }
 
