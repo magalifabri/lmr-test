@@ -108,10 +108,15 @@
     color: shared.$primary;
     font-size: 1.25rem;
 
-    // &:hover {
-    // }
-    // &:active {
-    // }
+    @media (hover: hover) {
+        &:hover:enabled {
+            background-color: shared.$primaryLighter3;
+        }
+    }
+    &:active:enabled {
+        background-color: shared.$primaryLighter1;
+        color: shared.$white;
+    }
     &.selected {
         border-color: shared.$accent;
         background-color: shared.$primaryLighter2;
