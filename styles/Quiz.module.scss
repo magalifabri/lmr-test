@@ -71,6 +71,24 @@
 
     color: shared.$primary;
     font-size: 1.25rem;
+
+    // &:hover {
+    // }
+    // &:active {
+    // }
+    &.selected {
+        border-color: shared.$accent;
+        background-color: shared.$primaryLighter2;
+        color: shared.$white;
+    }
+    &.correct {
+        border-color: shared.$green;
+        background-color: shared.$white;
+    }
+    &.incorrect {
+        border-color: shared.$red;
+        background-color: shared.$white;
+    }
 }
 
 .bigButton {

@@ -25,7 +25,7 @@ export default function Quiz({ quizData }: AppProps) {
                 <div className={styles.options}>
                     {quizData.answers.map((answer) => (
                         <button
-                            className={styles.optionButton}
+                            className={`${styles.optionButton}`}
                             key={answer.uid}
                         >
                             {answer.answer}
