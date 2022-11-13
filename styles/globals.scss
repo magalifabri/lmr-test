@@ -7,13 +7,14 @@
     padding: 0;
 
     // TODO: remove after creating UI
-    outline: 1px solid rgba(255, 0, 0, 0.5);
+    outline: 1px solid rgba(255, 0, 0, 1);
 }
 
 // TODO: remove after recreating UI
 html:before {
     content: "";
-    background: url("/images/quiz-active_answers.png");
+    // background: url("/images/quiz-active_answers.png");
+    background: url("/images/quiz-countdown_before_start.png");
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;

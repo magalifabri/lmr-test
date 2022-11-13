@@ -22,11 +22,19 @@
     align-items: center;
 }
 
-.timer {
-    width: 7rem;
+.timerContainer {
+    width: 100%;
     height: 2.75rem;
-    padding-left: 1.125rem;
     margin-bottom: 1.5rem;
+
+    display: flex;
+    justify-content: center;
+}
+
+.stopwatch {
+    width: 7rem;
+    height: 100%;
+    padding-left: 1.125rem;
 
     background-color: shared.$white;
     border-radius: 3rem;
@@ -43,6 +51,21 @@
     svg {
         height: 17px;
         fill: currentColor;
+    }
+}
+
+.countdownBar {
+    height: 0.625rem;
+    width: 30%;
+    margin-top: 1.5rem;
+
+    border-radius: 0.15rem;
+    background-color: shared.$primaryLighter1;
+
+    &__fill {
+        width: 75%;
+        height: 100%;
+        background-color: shared.$accent;
     }
 }
 
