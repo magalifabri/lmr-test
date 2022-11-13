@@ -46,7 +46,7 @@
 
 .question {
     max-width: 35rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     text-align: center;
     color: shared.$white;
 }
@@ -57,14 +57,20 @@
 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    row-gap: 1rem;
+    row-gap: 1.5rem;
     column-gap: 2rem;
 }
 
 .optionButton {
-    height: 4rem;
-    background-color: white;
-    border: 2px solid black;
+    height: 3.5rem;
+
+    background-color: shared.$primaryLighter4;
+    border: none;
+    border: 2px solid transparent;
+    border-radius: shared.$borderRadius;
+
+    color: shared.$primary;
+    font-size: 1.25rem;
 }
 
 .bigButton {
