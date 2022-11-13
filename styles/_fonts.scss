@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "FlandersArtSans";
+    src: local("FlandersArtSans-Light"),
+        url("/fonts/Flanders\ Art\ Sans/FlandersArtSans-Light.otf")
+            format("opentype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "FlandersArtSans";
+    src: local("FlandersArtSans-Regular"),
+        url("/fonts/Flanders\ Art\ Sans/FlandersArtSans-Regular.otf")
+            format("opentype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "FlandersArtSans";
+    src: local("FlandersArtSans-Medium"),
+        url("/fonts/Flanders\ Art\ Sans/FlandersArtSans-Medium.otf")
+            format("opentype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "FlandersArtSans";
+    src: local("FlandersArtSans-Bold"),
+        url("/fonts/Flanders\ Art\ Sans/FlandersArtSans-Bold.otf")
+            format("opentype");
+    font-weight: bold;
+}
