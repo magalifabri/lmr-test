@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 import Sidebar from "../components/Sidebar";
 import Quiz from "../components/Quiz";
 import IQuizData from "../interfaces/IQuizData";
+import IAnswer from "../interfaces/IAnswer";
 
 import styles from "../styles/Home.module.scss";
 
@@ -14,7 +15,9 @@ export async function getServerSideProps() {
 
     // add uid to answers to use as key prop
     quizData.map((entry: IQuizData) => {
-        entry.answers.map((answer) => (answer = { ...answer, uid: uuid() }));
+        entry.answers.map((answer: IAnswer) => {
+            answer.uid = uuid();
+        });
     });
 
     return { props: { quizData } };
