@@ -30,7 +30,7 @@ export default function Quiz({ quizData }: AppProps) {
         setTimeout(() => {
             setGamePhase(GamePhase.SELECTION);
         }, 5000);
-    }, []);
+    }, [question]);
 
     // initialize buttons styles
     useEffect(() => {
@@ -41,7 +41,7 @@ export default function Quiz({ quizData }: AppProps) {
         });
 
         setButtonStyles({ ...newButtonStyles });
-    }, []);
+    }, [question]);
 
     // count down selection phase time remaining
     useEffect(() => {
@@ -91,6 +91,17 @@ export default function Quiz({ quizData }: AppProps) {
         setButtonStyles({ ...newButtonStyles });
     };
 
+    const goToNextQuestion = () => {
+        const nextQuestionIndex =
+            questionIndex >= quizData.length - 1 ? 0 : questionIndex + 1;
+
+        setGamePhase(GamePhase.PRE_SELECTION);
+        setQuestionIndex(nextQuestionIndex);
+        setQuestion(quizData[nextQuestionIndex]);
+        setSecondsRemaining(quizData[nextQuestionIndex].time_limit_s);
+        setNumSelected(0);
+    };
+
     //#region UI HANDLERS
 
     const onAnswerSelect = (answerUid: string) => {
@@ -115,6 +126,10 @@ export default function Quiz({ quizData }: AppProps) {
     const onReadyButtonClick = () => {
         clearInterval(intervalId);
         endSelectionPhase();
+    };
+
+    const onProceedButtonClick = () => {
+        goToNextQuestion();
     };
     //#endregion
 
@@ -170,6 +185,7 @@ export default function Quiz({ quizData }: AppProps) {
                 {gamePhase === GamePhase.POST_SELECTION ? (
                     <button
                         className={`${styles.bigButton} ${styles.bigButton__yellow}`}
+                        onClick={() => onProceedButtonClick()}
                     >
                         Doorgaan
                     </button>
