@@ -105,6 +105,7 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
     };
 
     const onReadyButtonClick = () => {
+        clearInterval(intervalId);
         endSelectionPhase();
     };
     //#endregion
