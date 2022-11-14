@@ -46,21 +46,23 @@ export default function Quiz({ quizData }: AppProps) {
     // count down selection phase time remaining
     useEffect(() => {
         if (gamePhase === GamePhase.SELECTION) {
+            let seconds = question.time_limit_s;
+
             const interval = setInterval(() => {
-                setSecondsRemaining((a) => a - 1);
+                seconds--;
+
+                setSecondsRemaining(seconds);
+
+                // end of selection phase
+                if (seconds === 0) {
+                    clearInterval(interval);
+                    endSelectionPhase();
+                }
             }, 1000);
 
             setIntervalId(interval);
         }
     }, [gamePhase]);
-
-    // trigger end of selection phase
-    useEffect(() => {
-        if (!secondsRemaining) {
-            clearInterval(intervalId);
-            endSelectionPhase();
-        }
-    }, [secondsRemaining]);
     //#endregion
 
     const endSelectionPhase = () => {
