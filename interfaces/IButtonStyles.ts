@@ -1,3 +1,3 @@
 export default interface IButtonStyles {
-    [key: string]: string;
+    [key: string]: string[];
 }

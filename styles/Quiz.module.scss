@@ -126,16 +126,13 @@
         border-color: shared.$accent;
         background-color: shared.$primaryLighter2;
         color: shared.$white;
-    }
-    &.correctlySelected {
-        border-color: shared.$green;
-        background-color: shared.$primaryLighter2;
-        color: shared.$white;
-    }
-    &.incorrectlySelected {
-        border-color: shared.$red;
-        background-color: shared.$primaryLighter2;
-        color: shared.$white;
+
+        &.correctlySelected {
+            border-color: shared.$green;
+        }
+        &.incorrectlySelected {
+            border-color: shared.$red;
+        }
     }
     &.incorrectlyUnselected {
         border-color: shared.$red;

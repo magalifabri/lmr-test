@@ -18,11 +18,22 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
     );
     const [intervalId, setIntervalId] =
         useState<ReturnType<typeof setInterval>>();
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
     const [buttonStyles, setButtonStyles] = useState<IButtonStyles>({});
+    const [numSelected, setNumSelected] = useState(0);
     //#endregion
 
     //#region USE EFFECTS
+
+    // initialize buttons styles
+    useEffect(() => {
+        const newButtonStyles = buttonStyles;
+
+        quizData.answers.forEach((answer) => {
+            newButtonStyles[answer.uid] = [styles.optionButton];
+        });
+
+        setButtonStyles({ ...newButtonStyles });
+    }, []);
 
     // count down selection phase time remaining
     useEffect(() => {
@@ -47,12 +58,21 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
     //#region UI HANDLERS
 
     const onAnswerSelect = (answerUid: string) => {
-        if (selectedOptions.includes(answerUid)) {
-            const newSelectedOptions = selectedOptions;
-            newSelectedOptions.splice(selectedOptions.indexOf(answerUid), 1);
-            setSelectedOptions([...newSelectedOptions]);
+        const newButtonStyles = buttonStyles;
+
+        if (buttonStyles[answerUid].includes(styles.selected)) {
+            newButtonStyles[answerUid].splice(
+                buttonStyles[answerUid].indexOf(answerUid),
+                1
+            );
+
+            setButtonStyles({ ...newButtonStyles });
+            setNumSelected((prevState) => prevState - 1);
         } else {
-            setSelectedOptions((prevState) => [...prevState, answerUid]);
+            newButtonStyles[answerUid].push(styles.selected);
+
+            setButtonStyles({ ...newButtonStyles });
+            setNumSelected((prevState) => prevState + 1);
         }
     };
 
@@ -62,38 +82,26 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
 
         const newButtonStyles = buttonStyles;
 
-        // assign style to buttons to indicate correctness of selection state
+        // assign styles to buttons to indicate correctness of selection state
         quizData.answers.forEach((answer) => {
             if (answer.correct) {
-                if (selectedOptions.includes(answer.uid)) {
-                    newButtonStyles[answer.uid] = styles.correctlySelected;
+                if (buttonStyles[answer.uid].includes(styles.selected)) {
+                    newButtonStyles[answer.uid].push(styles.correctlySelected);
                 } else {
-                    newButtonStyles[answer.uid] = styles.incorrectlyUnselected;
+                    newButtonStyles[answer.uid].push(
+                        styles.incorrectlyUnselected
+                    );
                 }
             } else {
-                if (selectedOptions.includes(answer.uid)) {
-                    newButtonStyles[answer.uid] = styles.incorrectlySelected;
+                if (buttonStyles[answer.uid].includes(styles.selected)) {
+                    newButtonStyles[answer.uid].push(
+                        styles.incorrectlySelected
+                    );
                 }
             }
         });
 
         setButtonStyles({ ...newButtonStyles });
-    };
-    //#endregion
-
-    //#region UI HELPERS
-
-    const getOptionButtonClassnames = (answerUid: string) => {
-        if (
-            gamePhase === GamePhase.SELECTION &&
-            selectedOptions.includes(answerUid)
-        ) {
-            return `${styles.optionButton} ${styles.selected}`;
-        } else if (gamePhase === GamePhase.POST_SELECTION) {
-            return `${styles.optionButton} ${buttonStyles[answerUid]}`;
-        } else {
-            return `${styles.optionButton}`;
-        }
     };
     //#endregion
 
@@ -133,7 +141,7 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
                 >
                     {quizData.answers.map((answer) => (
                         <button
-                            className={getOptionButtonClassnames(answer.uid)}
+                            className={buttonStyles[answer.uid]?.join(" ")}
                             key={answer.uid}
                             disabled={gamePhase !== GamePhase.SELECTION}
                             id={answer.uid}
@@ -147,9 +155,9 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
                 </div>
 
                 <button
-                    disabled={!selectedOptions.length}
+                    disabled={!numSelected}
                     className={`${styles.bigButton} ${
-                        selectedOptions.length ? styles.bigButton__yellow : ""
+                        numSelected ? styles.bigButton__yellow : ""
                     }`}
                     onClick={() => onReadyButtonClick()}
                 >
