@@ -177,7 +177,12 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
                             Klaar!
                         </button>
 
-                        <button className={styles.bigButton}>
+                        <button
+                            disabled={gamePhase !== GamePhase.SELECTION}
+                            className={`${styles.bigButton} ${
+                                numSelected ? styles.bigButton__white : ""
+                            }`}
+                        >
                             Geef me een tip...
                         </button>
                     </>

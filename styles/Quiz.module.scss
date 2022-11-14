@@ -146,16 +146,21 @@
 
     color: shared.$primary;
     border: none;
-    background-color: shared.$white;
     border-radius: shared.$borderRadius;
-    @include shared.boxShadow(shared.$grayLighter1);
 
-    // &:active {
-    // }
-    // @media (hover: hover) {
-    //     &:hover {
-    //     }
-    // }
+    &__white {
+        background-color: shared.$white;
+        @include shared.boxShadow(shared.$grayLighter1);
+
+        // &:active {
+        // }
+        @media (hover: hover) {
+            &:hover:enabled {
+                background-color: shared.$primaryLighter5;
+                @include shared.boxShadow(shared.$primaryLighter3);
+            }
+        }
+    }
 
     &__yellow {
         background-color: shared.$accent;
@@ -163,10 +168,11 @@
 
         // &:active {
         // }
-        // @media (hover: hover) {
-        //     &:hover {
-        //     }
-        // }
+        @media (hover: hover) {
+            &:hover:enabled {
+                background-color: #ffeb4e;
+            }
+        }
     }
 
     &:disabled {
