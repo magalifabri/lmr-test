@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 
 import Sidebar from "../components/Sidebar";
@@ -35,15 +34,6 @@ type AppProps = {
 };
 
 export default function Home({ quizData }: AppProps) {
-    const [question, setQuestion] = useState(quizData[0]);
-    const [gamePhase, setGamePhase] = useState(GamePhase.PRE_SELECTION);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setGamePhase(GamePhase.SELECTION);
-        }, 5000);
-    }, []);
-
     return (
         <>
             <Head>
@@ -55,11 +45,7 @@ export default function Home({ quizData }: AppProps) {
             <div className={styles.container}>
                 <Sidebar />
 
-                <Quiz
-                    quizData={question}
-                    gamePhase={gamePhase}
-                    setGamePhase={setGamePhase}
-                />
+                <Quiz quizData={quizData} />
             </div>
         </>
     );

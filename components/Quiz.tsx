@@ -5,30 +5,38 @@ import { GamePhase } from "../pages/index";
 import { useEffect, useState } from "react";
 
 type AppProps = {
-    quizData: IQuizData;
-    gamePhase: GamePhase;
-    setGamePhase: Function;
+    quizData: Array<IQuizData>;
 };
 
-export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
+export default function Quiz({ quizData }: AppProps) {
     //#region VARIABLES
 
-    const [secondsRemaining, setSecondsRemaining] = useState(
-        quizData.time_limit_s
-    );
     const [intervalId, setIntervalId] =
         useState<ReturnType<typeof setInterval>>();
     const [buttonStyles, setButtonStyles] = useState<IButtonStyles>({});
     const [numSelected, setNumSelected] = useState(0);
+    const [questionIndex, setQuestionIndex] = useState(0);
+    const [question, setQuestion] = useState(quizData[questionIndex]);
+    const [gamePhase, setGamePhase] = useState(GamePhase.PRE_SELECTION);
+    const [secondsRemaining, setSecondsRemaining] = useState(
+        question.time_limit_s
+    );
     //#endregion
 
     //#region USE EFFECTS
+
+    // countdown before selection phase begin
+    useEffect(() => {
+        setTimeout(() => {
+            setGamePhase(GamePhase.SELECTION);
+        }, 5000);
+    }, []);
 
     // initialize buttons styles
     useEffect(() => {
         const newButtonStyles = buttonStyles;
 
-        quizData.answers.forEach((answer) => {
+        question.answers.forEach((answer) => {
             newButtonStyles[answer.uid] = [styles.optionButton];
         });
 
@@ -62,7 +70,7 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
         const newButtonStyles = buttonStyles;
 
         // assign styles to buttons to indicate correctness of selection state
-        quizData.answers.forEach((answer) => {
+        question.answers.forEach((answer) => {
             if (answer.correct) {
                 if (buttonStyles[answer.uid].includes(styles.selected)) {
                     newButtonStyles[answer.uid].push(styles.correctlySelected);
@@ -135,7 +143,7 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
                     )}
                 </div>
 
-                <h1 className={styles.question}>{quizData.question}</h1>
+                <h1 className={styles.question}>{question.question}</h1>
 
                 <div
                     className={`${styles.options} ${
@@ -144,7 +152,7 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
                             : styles.undef
                     }`}
                 >
-                    {quizData.answers.map((answer) => (
+                    {question.answers.map((answer) => (
                         <button
                             className={buttonStyles[answer.uid]?.join(" ")}
                             key={answer.uid}
