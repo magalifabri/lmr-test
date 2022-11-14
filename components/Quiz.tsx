@@ -50,33 +50,12 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
     useEffect(() => {
         if (!secondsRemaining) {
             clearInterval(intervalId);
-            console.log("time's up!"); // TODO: remove before prod
+            endSelectionPhase();
         }
     }, [secondsRemaining]);
     //#endregion
 
-    //#region UI HANDLERS
-
-    const onAnswerSelect = (answerUid: string) => {
-        const newButtonStyles = buttonStyles;
-
-        if (buttonStyles[answerUid].includes(styles.selected)) {
-            newButtonStyles[answerUid].splice(
-                buttonStyles[answerUid].indexOf(answerUid),
-                1
-            );
-
-            setButtonStyles({ ...newButtonStyles });
-            setNumSelected((prevState) => prevState - 1);
-        } else {
-            newButtonStyles[answerUid].push(styles.selected);
-
-            setButtonStyles({ ...newButtonStyles });
-            setNumSelected((prevState) => prevState + 1);
-        }
-    };
-
-    const onReadyButtonClick = () => {
+    const endSelectionPhase = () => {
         // move to next game phase
         setGamePhase(GamePhase.POST_SELECTION);
 
@@ -102,6 +81,31 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
         });
 
         setButtonStyles({ ...newButtonStyles });
+    };
+
+    //#region UI HANDLERS
+
+    const onAnswerSelect = (answerUid: string) => {
+        const newButtonStyles = buttonStyles;
+
+        if (buttonStyles[answerUid].includes(styles.selected)) {
+            newButtonStyles[answerUid].splice(
+                buttonStyles[answerUid].indexOf(answerUid),
+                1
+            );
+
+            setButtonStyles({ ...newButtonStyles });
+            setNumSelected((prevState) => prevState - 1);
+        } else {
+            newButtonStyles[answerUid].push(styles.selected);
+
+            setButtonStyles({ ...newButtonStyles });
+            setNumSelected((prevState) => prevState + 1);
+        }
+    };
+
+    const onReadyButtonClick = () => {
+        endSelectionPhase();
     };
     //#endregion
 
