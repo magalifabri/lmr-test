@@ -154,18 +154,29 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
                     ))}
                 </div>
 
-                <button
-                    disabled={!numSelected}
-                    className={`${styles.bigButton} ${
-                        numSelected ? styles.bigButton__yellow : ""
-                    }`}
-                    onClick={() => onReadyButtonClick()}
-                >
-                    Klaar!
-                </button>
+                {gamePhase === GamePhase.POST_SELECTION ? (
+                    <button
+                        className={`${styles.bigButton} ${styles.bigButton__yellow}`}
+                    >
+                        Doorgaan
+                    </button>
+                ) : (
+                    <>
+                        <button
+                            disabled={!numSelected}
+                            className={`${styles.bigButton} ${
+                                numSelected ? styles.bigButton__yellow : ""
+                            }`}
+                            onClick={() => onReadyButtonClick()}
+                        >
+                            Klaar!
+                        </button>
 
-                <button className={styles.bigButton}>Geef me een tip...</button>
-                {/* <button>Doorgaan</button> */}
+                        <button className={styles.bigButton}>
+                            Geef me een tip...
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
