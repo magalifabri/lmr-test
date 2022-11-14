@@ -106,7 +106,7 @@
 
     background-color: shared.$primaryLighter5;
     border: none;
-    border: 2px solid transparent;
+    border: 5px solid transparent;
     border-radius: shared.$borderRadius;
 
     color: shared.$primary;
@@ -127,13 +127,19 @@
         background-color: shared.$primaryLighter2;
         color: shared.$white;
     }
-    &.correct {
+    &.correctlySelected {
         border-color: shared.$green;
-        background-color: shared.$white;
+        background-color: shared.$primaryLighter2;
+        color: shared.$white;
     }
-    &.incorrect {
+    &.incorrectlySelected {
         border-color: shared.$red;
-        background-color: shared.$white;
+        background-color: shared.$primaryLighter2;
+        color: shared.$white;
+    }
+    &.incorrectlyUnselected {
+        border-color: shared.$red;
+        background-color: shared.$greenLighter1;
     }
 }
 

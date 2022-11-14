@@ -1,14 +1,16 @@
 import styles from "../styles/Quiz.module.scss";
 import IQuizData from "../interfaces/IQuizData";
+import IButtonStyles from "../interfaces/IButtonStyles";
 import { GamePhase } from "../pages/index";
 import { useEffect, useState } from "react";
 
 type AppProps = {
     quizData: IQuizData;
     gamePhase: GamePhase;
+    setGamePhase: Function;
 };
 
-export default function Quiz({ quizData, gamePhase }: AppProps) {
+export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
     //#region VARIABLES
 
     const [secondsRemaining, setSecondsRemaining] = useState(
@@ -17,6 +19,7 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
     const [intervalId, setIntervalId] =
         useState<ReturnType<typeof setInterval>>();
     const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [buttonStyles, setButtonStyles] = useState<IButtonStyles>({});
     //#endregion
 
     //#region USE EFFECTS
@@ -36,13 +39,9 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
     useEffect(() => {
         if (!secondsRemaining) {
             clearInterval(intervalId);
-            console.log("time's up!");
+            console.log("time's up!"); // TODO: remove before prod
         }
     }, [secondsRemaining]);
-
-    useEffect(() => {
-        console.log(selectedOptions);
-    }, [selectedOptions]);
     //#endregion
 
     //#region UI HANDLERS
@@ -54,6 +53,46 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
             setSelectedOptions([...newSelectedOptions]);
         } else {
             setSelectedOptions((prevState) => [...prevState, answerUid]);
+        }
+    };
+
+    const onReadyButtonClick = () => {
+        // move to next game phase
+        setGamePhase(GamePhase.POST_SELECTION);
+
+        const newButtonStyles = buttonStyles;
+
+        // assign style to buttons to indicate correctness of selection state
+        quizData.answers.forEach((answer) => {
+            if (answer.correct) {
+                if (selectedOptions.includes(answer.uid)) {
+                    newButtonStyles[answer.uid] = styles.correctlySelected;
+                } else {
+                    newButtonStyles[answer.uid] = styles.incorrectlyUnselected;
+                }
+            } else {
+                if (selectedOptions.includes(answer.uid)) {
+                    newButtonStyles[answer.uid] = styles.incorrectlySelected;
+                }
+            }
+        });
+
+        setButtonStyles({ ...newButtonStyles });
+    };
+    //#endregion
+
+    //#region UI HELPERS
+
+    const getOptionButtonClassnames = (answerUid: string) => {
+        if (
+            gamePhase === GamePhase.SELECTION &&
+            selectedOptions.includes(answerUid)
+        ) {
+            return `${styles.optionButton} ${styles.selected}`;
+        } else if (gamePhase === GamePhase.POST_SELECTION) {
+            return `${styles.optionButton} ${buttonStyles[answerUid]}`;
+        } else {
+            return `${styles.optionButton}`;
         }
     };
     //#endregion
@@ -94,13 +133,9 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
                 >
                     {quizData.answers.map((answer) => (
                         <button
-                            className={`${styles.optionButton} ${
-                                selectedOptions.includes(answer.uid)
-                                    ? styles.selected
-                                    : ""
-                            }`}
+                            className={getOptionButtonClassnames(answer.uid)}
                             key={answer.uid}
-                            disabled={gamePhase === GamePhase.PRE_SELECTION}
+                            disabled={gamePhase !== GamePhase.SELECTION}
                             id={answer.uid}
                             onClick={(e) => {
                                 onAnswerSelect((e.target as HTMLElement).id);
@@ -116,6 +151,7 @@ export default function Quiz({ quizData, gamePhase }: AppProps) {
                     className={`${styles.bigButton} ${
                         selectedOptions.length ? styles.bigButton__yellow : ""
                     }`}
+                    onClick={() => onReadyButtonClick()}
                 >
                     Klaar!
                 </button>

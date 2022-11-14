@@ -55,7 +55,11 @@ export default function Home({ quizData }: AppProps) {
             <div className={styles.container}>
                 <Sidebar />
 
-                <Quiz quizData={question} gamePhase={gamePhase} />
+                <Quiz
+                    quizData={question}
+                    gamePhase={gamePhase}
+                    setGamePhase={setGamePhase}
+                />
             </div>
         </>
     );
