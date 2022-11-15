@@ -67,11 +67,11 @@
         height: 100%;
         background-color: shared.$accent;
 
-        animation: deplete 5s linear both;
+        animation: deplete var(--timeRemainingMs, 5000ms) linear both;
 
         @keyframes deplete {
             from {
-                width: 100%;
+                width: var(--timeRemainingPercentage, 100%);
             }
             to {
                 width: 0%;

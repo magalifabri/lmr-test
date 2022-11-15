@@ -1,6 +1,11 @@
 @use "fonts";
 @use "shared";
 
+:root {
+    --timeRemainingPercentage: /* set programmatically */ ;
+    --timeRemainingMs: /* set programmatically */ ;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;

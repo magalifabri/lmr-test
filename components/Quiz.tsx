@@ -4,6 +4,8 @@ import IButtonStyles from "../interfaces/IButtonStyles";
 import { GamePhase } from "../pages/index";
 import { useEffect, useState } from "react";
 
+const PRE_SELECTION_PHASE_DURATION_MS = 5000;
+
 type AppProps = {
     quizData: Array<IQuizDataItem>;
 };
@@ -25,6 +27,19 @@ export default function Quiz({ quizData }: AppProps) {
 
     //#region USE EFFECTS
 
+    // set progress bar styling variables programmatically
+    useEffect(() => {
+        document.documentElement.style.setProperty(
+            "--timeRemainingPercentage",
+            "100%"
+        );
+
+        document.documentElement.style.setProperty(
+            "--timeRemainingMs",
+            `${PRE_SELECTION_PHASE_DURATION_MS}ms`
+        );
+    }, []);
+
     // logic for pre-selection phase of first / new question
     useEffect(() => {
         setPreSelectionPhaseTimer();
@@ -34,7 +49,7 @@ export default function Quiz({ quizData }: AppProps) {
     const setPreSelectionPhaseTimer = () => {
         setTimeout(() => {
             setGamePhase(GamePhase.SELECTION);
-        }, 5000);
+        }, PRE_SELECTION_PHASE_DURATION_MS);
     };
 
     const initButtonsStyles = () => {
