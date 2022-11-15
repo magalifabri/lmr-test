@@ -33,4 +33,29 @@ $borderRadius: 7px;
 @mixin boxShadow($color) {
     box-shadow: 0 4px 0 $color;
 }
+
+@mixin progressBarFill {
+    height: 100%;
+    background-color: $accent;
+    background-image: linear-gradient(
+        -65deg,
+        transparent 30%,
+        $accentDarker2 30%,
+        $accentDarker2 70%,
+        transparent 70%
+    );
+    background-size: 1.5rem;
+}
+// #endregion
+
+// #region ANIMATIONS
+
+@keyframes progressBarFillAnim {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 1.5rem 50%;
+    }
+}
 // #endregion

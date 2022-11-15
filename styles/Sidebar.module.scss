@@ -76,10 +76,11 @@
 
     &__fill {
         width: 20%;
-        height: 100%;
 
-        background-color: shared.$accent;
         border-radius: inherit;
+
+        @include shared.progressBarFill;
+        animation: progressBarFillAnim 1s linear infinite;
     }
 }
 

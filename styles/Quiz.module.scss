@@ -64,10 +64,10 @@
     background-color: shared.$primaryLighter1;
 
     &__fill {
-        height: 100%;
-        background-color: shared.$accent;
+        @include shared.progressBarFill;
 
-        animation: deplete var(--timeRemainingMs, 5000ms) linear both;
+        animation: deplete var(--timeRemainingMs, 5000ms) linear both,
+            progressBarFillAnim 1s linear infinite;
 
         @keyframes deplete {
             from {
