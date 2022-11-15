@@ -25,15 +25,19 @@ export default function Quiz({ quizData }: AppProps) {
 
     //#region USE EFFECTS
 
-    // countdown before selection phase begin
+    // logic for pre-selection phase of first / new question
     useEffect(() => {
+        setPreSelectionPhaseTimer();
+        initButtonsStyles();
+    }, [question]);
+
+    const setPreSelectionPhaseTimer = () => {
         setTimeout(() => {
             setGamePhase(GamePhase.SELECTION);
         }, 5000);
-    }, [question]);
+    };
 
-    // initialize buttons styles
-    useEffect(() => {
+    const initButtonsStyles = () => {
         const newButtonStyles = buttonStyles;
 
         question.answers.forEach((answer) => {
@@ -41,7 +45,7 @@ export default function Quiz({ quizData }: AppProps) {
         });
 
         setButtonStyles({ ...newButtonStyles });
-    }, [question]);
+    };
 
     // count down selection phase time remaining
     useEffect(() => {
