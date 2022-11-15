@@ -1,11 +1,11 @@
 import styles from "../styles/Quiz.module.scss";
-import IQuizData from "../interfaces/IQuizData";
+import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
 import { GamePhase } from "../pages/index";
 import { useEffect, useState } from "react";
 
 type AppProps = {
-    quizData: Array<IQuizData>;
+    quizData: Array<IQuizDataItem>;
 };
 
 export default function Quiz({ quizData }: AppProps) {

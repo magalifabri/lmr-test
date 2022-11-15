@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 
 import Sidebar from "../components/Sidebar";
 import Quiz from "../components/Quiz";
-import IQuizData from "../interfaces/IQuizData";
+import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IAnswer from "../interfaces/IAnswer";
 
 import styles from "../styles/Home.module.scss";
@@ -14,7 +14,7 @@ export async function getServerSideProps() {
     const quizData = await res.json();
 
     // add uid to answers to use as key prop
-    quizData.map((entry: IQuizData) => {
+    quizData.map((entry: IQuizDataItem) => {
         entry.answers.map((answer: IAnswer) => {
             answer.uid = uuid();
         });
@@ -30,7 +30,7 @@ export enum GamePhase {
 }
 
 type AppProps = {
-    quizData: IQuizData[];
+    quizData: IQuizDataItem[];
 };
 
 export default function Home({ quizData }: AppProps) {
