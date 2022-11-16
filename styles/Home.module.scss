@@ -13,44 +13,52 @@
 }
 
 .menuButton {
-    // -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    cursor: pointer;
-    z-index: 2;
-    position: fixed;
-    top: 4rem;
-    right: 0.75rem;
-    width: 40px;
-    height: 40px;
+    display: none;
 
-    background-color: shared.$primary;
-    border-radius: 50%;
+    @media only screen and (max-width: shared.$mobileBreakpoint) {
+        // -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        cursor: pointer;
+        display: flex;
+        z-index: 2;
+        position: fixed;
+        top: 4rem;
+        right: 0.75rem;
+        width: 40px;
+        height: 40px;
 
-    &__bar {
-        position: absolute;
-        left: 25%;
-        top: calc(50% - 3px / 2);
-        width: 50%;
-        height: 3px;
+        background-color: shared.$primary;
+        border-radius: 50%;
 
-        border-radius: 1px;
-        background-color: shared.$accent;
+        &__bar {
+            position: absolute;
+            left: 25%;
+            top: calc(50% - 3px / 2);
+            width: 50%;
+            height: 3px;
 
-        transition: all 0.3s ease-out;
+            border-radius: 1px;
+            background-color: shared.$accent;
 
-        &:first-child {
-            transform: translateY(-4px);
+            transition: all 0.3s ease-out;
+
+            &:first-child {
+                transform: translateY(-4px);
+            }
+            &:last-child {
+                transform: translateY(4px);
+            }
         }
-        &:last-child {
-            transform: translateY(4px);
+
+        &.active .menuButton__bar {
+            &:first-child {
+                transform: rotate(-135deg);
+            }
+            &:last-child {
+                transform: rotate(-45deg);
+            }
         }
     }
+}
 
-    &.active .menuButton__bar {
-        &:first-child {
-            transform: rotate(-135deg);
-        }
-        &:last-child {
-            transform: rotate(-45deg);
-        }
-    }
+.menuButton {
 }
