@@ -1,9 +1,14 @@
-import Image from "next/image";
 import styles from "../styles/Sidebar.module.scss";
 
-export default function Sidebar() {
+type AppProps = {
+    menuActive: boolean;
+};
+
+export default function Sidebar({ menuActive }: AppProps) {
     return (
-        <div className={styles.container}>
+        <div
+            className={`${styles.container} ${menuActive ? styles.active : ""}`}
+        >
             <div className={styles.intro}>
                 <div className={styles.cover}>
                     <div className={styles.info}>

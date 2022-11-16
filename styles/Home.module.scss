@@ -11,3 +11,46 @@
 
     background-color: shared.$primary;
 }
+
+.menuButton {
+    // -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    z-index: 2;
+    position: fixed;
+    top: 4rem;
+    right: 0.75rem;
+    width: 40px;
+    height: 40px;
+
+    background-color: shared.$primary;
+    border-radius: 50%;
+
+    &__bar {
+        position: absolute;
+        left: 25%;
+        top: calc(50% - 3px / 2);
+        width: 50%;
+        height: 3px;
+
+        border-radius: 1px;
+        background-color: shared.$accent;
+
+        transition: all 0.3s ease-out;
+
+        &:first-child {
+            transform: translateY(-4px);
+        }
+        &:last-child {
+            transform: translateY(4px);
+        }
+    }
+
+    &.active .menuButton__bar {
+        &:first-child {
+            transform: rotate(-135deg);
+        }
+        &:last-child {
+            transform: rotate(-45deg);
+        }
+    }
+}

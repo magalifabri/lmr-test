@@ -11,13 +11,39 @@
 
     background-color: shared.$primaryLighter1;
     border-radius: 1rem;
+
+    @media only screen and (max-width: shared.$mobileBreakpoint) {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: min(100vw, 370px);
+        height: 100vh;
+
+        transform: translateX(-100%);
+        transition: all 0.4s ease;
+
+        &.active {
+            transform: translateX(0%);
+        }
+    }
+}
+
+.menuButton {
+    display: none;
+}
+
+@media only screen and (max-width: shared.$mobileBreakpoint) {
+    .menuButton {
+        display: flex;
+    }
 }
 
 .intro {
     flex: 1;
     background-color: shared.$white;
     border-radius: 0.5rem;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .cover {

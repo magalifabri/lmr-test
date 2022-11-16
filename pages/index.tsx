@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Head from "next/head";
 import { v4 as uuid } from "uuid";
 
@@ -34,6 +35,8 @@ type AppProps = {
 };
 
 export default function Home({ quizData }: AppProps) {
+    const [menuActive, setMenuActive] = useState(true);
+
     return (
         <>
             <Head>
@@ -43,7 +46,17 @@ export default function Home({ quizData }: AppProps) {
             </Head>
 
             <div className={styles.container}>
-                <Sidebar />
+                <div
+                    className={`${styles.menuButton} ${
+                        menuActive ? styles.active : ""
+                    }`}
+                    onClick={() => setMenuActive(!menuActive)}
+                >
+                    <span className={styles.menuButton__bar}></span>
+                    <span className={styles.menuButton__bar}></span>
+                </div>
+
+                <Sidebar menuActive={menuActive} />
 
                 <Quiz quizData={quizData} />
             </div>
