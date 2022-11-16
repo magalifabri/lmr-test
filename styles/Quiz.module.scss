@@ -38,6 +38,7 @@
 
     background-color: shared.$white;
     border-radius: 3rem;
+    border: 3px solid transparent;
     @include shared.boxShadow(shared.$primary);
 
     color: shared.$primary;
@@ -51,8 +52,24 @@
     svg {
         height: 17px;
         fill: currentColor;
+    }
 
-        &.timeAlmostUp {
+    &.timeAlmostUp {
+        animation: flashRed 1s linear infinite;
+
+        @keyframes flashRed {
+            0%,
+            100% {
+                border-color: transparent;
+                color: shared.$primary;
+            }
+            50% {
+                border-color: shared.$red;
+                color: shared.$red;
+            }
+        }
+
+        svg {
             animation: pulse 1s infinite;
 
             @keyframes pulse {
@@ -62,7 +79,7 @@
                     fill: currentColor;
                 }
                 50% {
-                    transform: scale(1.75);
+                    transform: scale(1.5);
                     fill: shared.$red;
                 }
             }

@@ -156,13 +156,15 @@ export default function Quiz({ quizData }: AppProps) {
 
     //#region RENDER LOGIC
 
-    const getStopwatchIconStyle = () => {
+    const getStopwatchStyle = () => {
         if (
             secondsRemaining <= 5 &&
             secondsRemaining > 0 &&
             gamePhase === GamePhase.SELECTION
         ) {
-            return styles.timeAlmostUp;
+            return `${styles.stopwatch} ${styles.timeAlmostUp}`;
+        } else {
+            return styles.stopwatch;
         }
     };
     //#endregion
@@ -176,9 +178,8 @@ export default function Quiz({ quizData }: AppProps) {
                             <div className={styles.countdownBar__fill}></div>
                         </div>
                     ) : (
-                        <div className={styles.stopwatch}>
+                        <div className={getStopwatchStyle()}>
                             <svg
-                                className={getStopwatchIconStyle()}
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 448 512"
                             >
