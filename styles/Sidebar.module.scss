@@ -109,7 +109,7 @@
         border-radius: inherit;
 
         @include shared.progressBarFill;
-        animation: progressBarFillAnim 1s linear infinite;
+        animation: progressBarFillAnim 1.5s linear infinite;
     }
 }
 

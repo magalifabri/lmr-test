@@ -83,7 +83,7 @@
         @include shared.progressBarFill;
 
         animation: deplete var(--timeRemainingMs, 5000ms) linear both,
-            progressBarFillAnim 1s linear infinite;
+            progressBarFillAnim 1.5s linear infinite;
 
         @keyframes deplete {
             from {
