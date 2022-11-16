@@ -12,7 +12,7 @@
 
 .innerContainer {
     flex: 1;
-    padding: 0.5rem 2.75rem;
+    padding: 0.5rem 3.75vw 1.5rem;
 
     border-radius: 0.5rem;
     background-color: shared.$primaryDarker1;
@@ -118,7 +118,7 @@
 }
 
 .optionButton {
-    height: 3.5rem;
+    padding: 0.65rem;
 
     background-color: shared.$primaryLighter5;
     border: none;
