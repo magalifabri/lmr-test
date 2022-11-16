@@ -18,7 +18,7 @@
         left: 0;
         top: 0;
         width: min(100vw, 370px);
-        height: 100vh;
+        height: 100%;
 
         transform: translateX(-100%);
         transition: all 0.4s ease;
@@ -179,6 +179,23 @@
     border-top: 2px solid shared.$primaryLighter2;
     width: 33%;
     margin: 0.875rem auto 1rem;
+}
+
+.startButton {
+    display: none;
+
+    &.active {
+        display: inline-block;
+        height: 48px;
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+
+        color: shared.$primary;
+        background-color: shared.$accent;
+        border: none;
+        border-radius: shared.$borderRadius;
+        @include shared.boxShadow(shared.$accentDarker2);
+    }
 }
 
 .navigation {

@@ -26,6 +26,7 @@ export async function getServerSideProps() {
 }
 
 export enum GamePhase {
+    GETTING_READY,
     PRE_SELECTION,
     SELECTION,
     POST_SELECTION,
@@ -37,6 +38,7 @@ type AppProps = {
 
 export default function Home({ quizData }: AppProps) {
     const [menuActive, setMenuActive] = useState(true);
+    const [gamePhase, setGamePhase] = useState(GamePhase.GETTING_READY);
 
     return (
         <>
@@ -47,14 +49,25 @@ export default function Home({ quizData }: AppProps) {
             </Head>
 
             <div className={styles.container}>
-                <MenuButton
+                {gamePhase !== GamePhase.GETTING_READY && (
+                    <MenuButton
+                        menuActive={menuActive}
+                        setMenuActive={setMenuActive}
+                    />
+                )}
+
+                <Sidebar
                     menuActive={menuActive}
                     setMenuActive={setMenuActive}
+                    gamePhase={gamePhase}
+                    setGamePhase={setGamePhase}
                 />
 
-                <Sidebar menuActive={menuActive} />
-
-                <Quiz quizData={quizData} />
+                <Quiz
+                    quizData={quizData}
+                    gamePhase={gamePhase}
+                    setGamePhase={setGamePhase}
+                />
             </div>
         </>
     );

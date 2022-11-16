@@ -8,9 +8,11 @@ const PRE_SELECTION_PHASE_DURATION_MS = 5000;
 
 type AppProps = {
     quizData: Array<IQuizDataItem>;
+    gamePhase: GamePhase;
+    setGamePhase: Function;
 };
 
-export default function Quiz({ quizData }: AppProps) {
+export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
     //#region VARIABLES
 
     const [intervalId, setIntervalId] =
@@ -19,7 +21,6 @@ export default function Quiz({ quizData }: AppProps) {
     const [numSelected, setNumSelected] = useState(0);
     const [questionIndex, setQuestionIndex] = useState(0);
     const [question, setQuestion] = useState(quizData[questionIndex]);
-    const [gamePhase, setGamePhase] = useState(GamePhase.PRE_SELECTION);
     const [secondsRemaining, setSecondsRemaining] = useState(
         question.time_limit_s
     );
@@ -40,11 +41,18 @@ export default function Quiz({ quizData }: AppProps) {
         );
     }, []);
 
-    // logic for pre-selection phase of first / new question
     useEffect(() => {
-        setPreSelectionPhaseTimer();
-        initButtonsStyles();
-    }, [question]);
+        if (gamePhase === GamePhase.PRE_SELECTION) {
+            setPreSelectionPhaseTimer();
+        }
+
+        if (
+            gamePhase === GamePhase.GETTING_READY ||
+            gamePhase === GamePhase.PRE_SELECTION
+        ) {
+            initButtonsStyles();
+        }
+    }, [gamePhase]);
 
     const setPreSelectionPhaseTimer = () => {
         setTimeout(() => {
@@ -167,6 +175,17 @@ export default function Quiz({ quizData }: AppProps) {
             return styles.stopwatch;
         }
     };
+
+    const getOptionsStyle = () => {
+        if (
+            gamePhase === GamePhase.GETTING_READY ||
+            gamePhase === GamePhase.PRE_SELECTION
+        ) {
+            return styles.options + " " + styles.options__hidden;
+        } else {
+            return styles.options;
+        }
+    };
     //#endregion
 
     return (
@@ -196,13 +215,7 @@ export default function Quiz({ quizData }: AppProps) {
 
                 <h1 className={styles.question}>{question.question}</h1>
 
-                <div
-                    className={`${styles.options} ${
-                        gamePhase === GamePhase.PRE_SELECTION
-                            ? styles.options__hidden
-                            : styles.undef
-                    }`}
-                >
+                <div className={getOptionsStyle()}>
                     {question.answers.map((answer) => (
                         <button
                             className={buttonStyles[answer.uid]?.join(" ")}

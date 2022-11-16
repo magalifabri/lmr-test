@@ -1,10 +1,38 @@
+import { GamePhase } from "../pages";
 import styles from "../styles/Sidebar.module.scss";
 
 type AppProps = {
     menuActive: boolean;
+    gamePhase: GamePhase;
+    setMenuActive: Function;
+    setGamePhase: Function;
 };
 
-export default function Sidebar({ menuActive }: AppProps) {
+export default function Sidebar({
+    menuActive,
+    gamePhase,
+    setMenuActive,
+    setGamePhase,
+}: AppProps) {
+    //#region UI HANDLERS
+
+    const onStartButtonClick = () => {
+        setGamePhase(GamePhase.PRE_SELECTION);
+        setMenuActive(false);
+    };
+    //#endregion
+
+    //#region RENDER LOGIC
+
+    const getStartButtonStyle = () => {
+        if (gamePhase === GamePhase.GETTING_READY) {
+            return styles.startButton + " " + styles.active;
+        } else {
+            return styles.startButton;
+        }
+    };
+    //#endregion
+
     return (
         <div
             className={`${styles.container} ${menuActive ? styles.active : ""}`}
@@ -56,6 +84,15 @@ export default function Sidebar({ menuActive }: AppProps) {
                         Een gezonde <b>vegetarische</b> pizza met 7 gepaste
                         ingrediënten.
                     </p>
+
+                    <button
+                        onClick={() => {
+                            onStartButtonClick();
+                        }}
+                        className={getStartButtonStyle()}
+                    >
+                        Aan de slag!
+                    </button>
                 </div>
             </div>
 
