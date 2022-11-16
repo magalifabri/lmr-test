@@ -94,6 +94,11 @@
     padding-right: 0.5rem;
 
     display: flex;
+
+    // mobile: make space for menu button
+    @media only screen and (max-width: 400px) {
+        margin-right: 2.25rem;
+    }
 }
 
 .progressBar {
