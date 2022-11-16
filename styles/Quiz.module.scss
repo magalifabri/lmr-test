@@ -117,10 +117,6 @@
             background-color: shared.$primaryLighter3;
         }
     }
-    &:active:enabled {
-        background-color: shared.$primaryLighter1;
-        color: shared.$white;
-    }
 
     &.selected {
         border-color: shared.$accent;
@@ -152,8 +148,6 @@
         background-color: shared.$white;
         @include shared.boxShadow(shared.$grayLighter1);
 
-        // &:active {
-        // }
         @media (hover: hover) {
             &:hover:enabled {
                 background-color: shared.$primaryLighter5;
@@ -166,8 +160,6 @@
         background-color: shared.$accent;
         @include shared.boxShadow(shared.$accentDarker1);
 
-        // &:active {
-        // }
         @media (hover: hover) {
             &:hover:enabled {
                 background-color: #ffeb4e;
