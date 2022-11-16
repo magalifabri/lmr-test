@@ -16,20 +16,28 @@
 }
 
 // TODO: remove after recreating UI
-html:before {
-    content: "";
-    // background: url("/images/quiz-active_answers.png");
-    background: url("/images/quiz-countdown_before_start.png");
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-    opacity: 0.75;
-}
+// html:before {
+//     content: "";
+//     // background: url("/images/quiz-active_answers.png");
+//     background: url("/images/quiz-countdown_before_start.png");
+//     background-repeat: no-repeat;
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+//     z-index: -1;
+//     opacity: 0.75;
+// }
 
 body {
     font-family: "FlandersArtSans", sans-serif;
+    background-color: shared.$primary;
+
+    // to place the child in the vertical center of the viewport
+    min-height: 100vh;
+
+    // reduces height and width of child to minimum
+    display: grid;
+    place-content: center;
 }
 
 h1 {

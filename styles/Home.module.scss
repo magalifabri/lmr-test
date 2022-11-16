@@ -1,7 +1,8 @@
 @use "shared";
 
 .container {
-    min-height: 100vh;
+    min-height: min(100vh, 850px);
+    min-width: min(100vw, 1300px);
     padding: 1.5rem;
     padding-bottom: 1rem;
 
