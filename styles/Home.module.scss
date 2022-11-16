@@ -3,11 +3,17 @@
 .container {
     min-height: min(100vh, 850px);
     min-width: min(100vw, 1300px);
-    padding: 1.5rem;
-    padding-bottom: 1rem;
 
     display: flex;
     gap: 1rem;
 
-    background-color: shared.$primary;
+    background-color: shared.$primaryLighter1;
+
+    // desktop
+    @media only screen and (min-width: calc(shared.$mobileBreakpoint + 1px)) {
+        padding: 1.5rem;
+        padding-bottom: 1rem;
+
+        background-color: shared.$primary;
+    }
 }
