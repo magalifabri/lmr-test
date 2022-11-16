@@ -165,6 +165,12 @@ export default function Quiz({ quizData }: AppProps) {
                     ) : (
                         <div className={styles.stopwatch}>
                             <svg
+                                className={
+                                    secondsRemaining <= 5 &&
+                                    secondsRemaining > 0
+                                        ? styles.timeAlmostUp
+                                        : ""
+                                }
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 448 512"
                             >

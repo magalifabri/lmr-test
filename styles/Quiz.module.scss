@@ -51,6 +51,22 @@
     svg {
         height: 17px;
         fill: currentColor;
+
+        &.timeAlmostUp {
+            animation: pulse 1s infinite;
+
+            @keyframes pulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                    fill: currentColor;
+                }
+                50% {
+                    transform: scale(1.75);
+                    fill: shared.$red;
+                }
+            }
+        }
     }
 }
 
