@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 
 import Sidebar from "../components/Sidebar";
 import Quiz from "../components/Quiz";
+import MenuButton from "../components/MenuButton";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IAnswer from "../interfaces/IAnswer";
 
@@ -46,15 +47,10 @@ export default function Home({ quizData }: AppProps) {
             </Head>
 
             <div className={styles.container}>
-                <div
-                    className={`${styles.menuButton} ${
-                        menuActive ? styles.active : ""
-                    }`}
-                    onClick={() => setMenuActive(!menuActive)}
-                >
-                    <span className={styles.menuButton__bar}></span>
-                    <span className={styles.menuButton__bar}></span>
-                </div>
+                <MenuButton
+                    menuActive={menuActive}
+                    setMenuActive={setMenuActive}
+                />
 
                 <Sidebar menuActive={menuActive} />
 
