@@ -64,11 +64,14 @@
 
 .level {
     flex: 1;
-    padding: 4px;
+    padding: 0.25rem;
+    padding-right: 0.5rem;
+
+    display: flex;
 }
 
 .progressBar {
-    width: 55%;
+    flex: 1;
     height: 100%;
 
     background-color: shared.$primaryLighter1;
@@ -174,6 +177,7 @@
 .bigButton {
     flex: 1;
     height: 48px;
+    padding: 0 0.5rem;
 
     background-color: shared.$accent;
     border: none;
@@ -183,7 +187,8 @@
     color: shared.$primary;
 
     display: flex;
-    justify-content: space-evenly;
+    gap: 0.5rem;
+    justify-content: space-around;
     align-items: center;
 
     svg {
