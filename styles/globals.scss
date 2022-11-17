@@ -47,8 +47,11 @@ body {
     font-family: "FlandersArtSans", sans-serif;
     background-color: shared.$primary;
 
-    // mobile: don't allow body to scroll when menu is open
+    // mobile
     @media only screen and (max-width: shared.$mobileBreakpoint) {
+        background-color: shared.$primaryLighter1;
+
+        // don't allow body to scroll when menu is open
         // menuActive is set on MenuButton
         &:has(.menuActive) {
             overflow: hidden;
