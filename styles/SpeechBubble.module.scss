@@ -1,0 +1,53 @@
+@use "shared";
+
+.container {
+    display: none;
+    position: relative;
+    top: 0.5rem;
+    left: 1rem;
+    width: 12.5rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background-color: shared.$white;
+    border-radius: shared.$borderRadius;
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 1rem;
+        transform: translateY(-95%);
+
+        border: 0.5rem solid transparent;
+        border-bottom: 0.5rem solid shared.$white;
+    }
+
+    &.active {
+        display: inline-block;
+        transform-origin: 0 0;
+        animation: lifetime 5000ms ease both;
+
+        @keyframes lifetime {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            5% {
+                opacity: 1;
+                transform: scale(1.05);
+                animation-timing-function: ease-out;
+            }
+            7%,
+            90% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.75);
+            }
+        }
+    }
+}
