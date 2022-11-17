@@ -1,0 +1,30 @@
+@use "shared";
+
+.avatar {
+    background-image: url("/images/avatar.png");
+    background-repeat: no-repeat;
+    background-position: 50% 5px;
+    border-radius: 50%;
+    background-color: shared.$primaryLighter4;
+
+    &__foreground {
+        margin: 0 auto;
+
+        height: 95%;
+        width: 95%;
+
+        background-size: 95%;
+
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
+    }
+    &__background {
+        opacity: 0.2;
+        position: absolute;
+        top: 0;
+
+        height: 100%;
+        width: 100%;
+
+        background-size: 90%;
+    }
+}
