@@ -35,7 +35,9 @@ export default function Sidebar({
 
     return (
         <div
-            className={`${styles.container} ${menuActive ? styles.active : ""}`}
+            className={`${styles.container} ${
+                menuActive ? styles.active + " menuActive" : ""
+            }`}
         >
             <div className={styles.intro}>
                 <div className={styles.cover}>
