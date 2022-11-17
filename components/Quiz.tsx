@@ -1,4 +1,5 @@
 import styles from "../styles/Quiz.module.scss";
+import Avatar from "./Avatar";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
 import { GamePhase } from "../pages/index";
@@ -10,9 +11,15 @@ type AppProps = {
     quizData: Array<IQuizDataItem>;
     gamePhase: GamePhase;
     setGamePhase: Function;
+    menuActive: boolean;
 };
 
-export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
+export default function Quiz({
+    quizData,
+    gamePhase,
+    setGamePhase,
+    menuActive,
+}: AppProps) {
     //#region VARIABLES
 
     const [intervalId, setIntervalId] =
@@ -186,10 +193,22 @@ export default function Quiz({ quizData, gamePhase, setGamePhase }: AppProps) {
             return styles.options;
         }
     };
+
+    const getAvatarContainerStyle = () => {
+        if (menuActive) {
+            return styles.avatarContainer;
+        } else {
+            return styles.avatarContainer + " " + styles.active;
+        }
+    };
     //#endregion
 
     return (
         <div className={styles.container}>
+            <div className={getAvatarContainerStyle()}>
+                <Avatar />
+            </div>
+
             <div className={styles.innerContainer}>
                 <div className={styles.timerContainer}>
                     {gamePhase === GamePhase.PRE_SELECTION ? (

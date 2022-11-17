@@ -67,6 +67,7 @@ export default function Home({ quizData }: AppProps) {
                     quizData={quizData}
                     gamePhase={gamePhase}
                     setGamePhase={setGamePhase}
+                    menuActive={menuActive}
                 />
             </div>
         </>

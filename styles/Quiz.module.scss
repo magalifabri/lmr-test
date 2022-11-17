@@ -10,6 +10,29 @@
     display: flex;
 }
 
+.avatarContainer {
+    display: none;
+
+    @media only screen and (max-width: shared.$mobileBreakpoint) {
+        display: inline-block;
+
+        position: absolute;
+        height: 75px;
+        width: 75px;
+
+        left: -5rem;
+        top: -0.5rem;
+
+        transition: all 0.3s 0s;
+
+        &.active {
+            transition: all 0.3s 0.2s;
+            left: -0.5rem;
+            top: -0.5rem;
+        }
+    }
+}
+
 .innerContainer {
     flex: 1;
     padding: 0.5rem 3.75vw 1.5rem;
