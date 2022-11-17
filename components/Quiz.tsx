@@ -1,5 +1,6 @@
 import styles from "../styles/Quiz.module.scss";
 import Avatar from "./Avatar";
+import SpeechBubble from "./SpeechBubble";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
 import { GamePhase } from "../pages/index";
@@ -31,6 +32,7 @@ export default function Quiz({
     const [secondsRemaining, setSecondsRemaining] = useState(
         question.time_limit_s
     );
+    const [speechBubbleActive, setSpeechBubbleActive] = useState(false);
     //#endregion
 
     //#region USE EFFECTS
@@ -201,12 +203,24 @@ export default function Quiz({
             return styles.avatarContainer + " " + styles.active;
         }
     };
+
+    const getTipButtonDisabledState = () => {
+        if (gamePhase !== GamePhase.SELECTION || speechBubbleActive) {
+            return true;
+        } else {
+            return false;
+        }
+    };
     //#endregion
 
     return (
         <div className={styles.container}>
             <div className={getAvatarContainerStyle()}>
                 <Avatar />
+                <SpeechBubble
+                    active={speechBubbleActive}
+                    setActive={setSpeechBubbleActive}
+                />
             </div>
 
             <div className={styles.innerContainer}>
@@ -270,8 +284,9 @@ export default function Quiz({
                         </button>
 
                         <button
-                            disabled={gamePhase !== GamePhase.SELECTION}
+                            disabled={getTipButtonDisabledState()}
                             className={`${styles.bigButton} ${styles.bigButton__white}`}
+                            onClick={() => setSpeechBubbleActive(true)}
                         >
                             Geef me een tip...
                         </button>
