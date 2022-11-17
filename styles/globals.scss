@@ -28,16 +28,24 @@
 //     opacity: 0.75;
 // }
 
+html {
+    min-height: 100%; // fill viewport height
+    display: flex; // make children (= body) fill viewport height
+}
+
 body {
+    flex: 1; // fill viewport width
+    display: flex; // make children (=Home) fill viewport height
+
+    // desktop
+    @media only screen and (min-width: calc(shared.$mobileBreakpoint + 1px)) {
+        justify-content: center;
+        align-items: center;
+        // also reduces height and width of children to minimum
+    }
+
     font-family: "FlandersArtSans", sans-serif;
     background-color: shared.$primary;
-
-    // to place the child in the vertical center of the viewport
-    min-height: 100vh;
-
-    // reduces height and width of child to minimum
-    display: grid;
-    place-content: center;
 }
 
 h1 {
