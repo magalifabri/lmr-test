@@ -1,5 +1,7 @@
 @use "shared";
 
+$borderRadius: 0.5rem;
+
 .container {
     width: 370px;
     padding: 1rem;
@@ -41,12 +43,17 @@
 
 .intro {
     flex: 1;
-    background-color: shared.$white;
-    border-radius: 0.5rem;
     overflow: scroll;
+
+    background-color: shared.$primaryLighter1;
+    border-radius: $borderRadius;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .cover {
+    flex-shrink: 0;
     height: 175px;
     padding: 0.5rem;
     position: relative;
@@ -56,6 +63,7 @@
         url("/images/background.png");
     background-size: 160%;
     background-position: 75% 50%;
+    border-radius: $borderRadius $borderRadius 0 0;
 }
 
 .info {
@@ -158,10 +166,15 @@
 }
 
 .text {
+    flex: 1;
     padding: 1rem;
     padding-top: 3rem;
+
     text-align: center;
     color: shared.$primary;
+
+    background-color: shared.$white;
+    border-radius: 0 0 $borderRadius $borderRadius;
 
     p {
         padding-bottom: 1.5rem;
