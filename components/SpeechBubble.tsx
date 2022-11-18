@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/SpeechBubble.module.scss";
 
-type AppProps = {
+interface AppProps {
     active: boolean;
     setActive: Function;
     location: "sidebar" | "quiz";
     message?: string;
-};
+}
 export default function SpeechBubble({
     active,
     setActive,

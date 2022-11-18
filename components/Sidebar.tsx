@@ -4,14 +4,14 @@ import SpeechBubble from "./SpeechBubble";
 import { GamePhase } from "../pages";
 import styles from "../styles/Sidebar.module.scss";
 
-type AppProps = {
+interface AppProps {
     menuActive: boolean;
     gamePhase: GamePhase;
     setMenuActive: Function;
     setGamePhase: Function;
     speechBubbleActive: boolean;
     setSpeechBubbleActive: Function;
-};
+}
 
 export default function Sidebar({
     menuActive,

@@ -8,14 +8,14 @@ import { useEffect, useState } from "react";
 
 const PRE_SELECTION_PHASE_DURATION_MS = 5000;
 
-type AppProps = {
+interface AppProps {
     quizData: Array<IQuizDataItem>;
     gamePhase: GamePhase;
     setGamePhase: Function;
     menuActive: boolean;
     speechBubbleActive: boolean;
     setSpeechBubbleActive: Function;
-};
+}
 
 export default function Quiz({
     quizData,

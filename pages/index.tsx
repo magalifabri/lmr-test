@@ -32,9 +32,9 @@ export enum GamePhase {
     POST_SELECTION,
 }
 
-type AppProps = {
+interface AppProps {
     quizData: IQuizDataItem[];
-};
+}
 
 export default function Home({ quizData }: AppProps) {
     const [menuActive, setMenuActive] = useState(true);

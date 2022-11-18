@@ -1,9 +1,9 @@
 import styles from "../styles/MenuButton.module.scss";
 
-type AppProps = {
+interface AppProps {
     menuActive: boolean;
     setMenuActive: Function;
-};
+}
 
 export default function MenuButton({ menuActive, setMenuActive }: AppProps) {
     return (
