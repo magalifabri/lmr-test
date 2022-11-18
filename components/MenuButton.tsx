@@ -6,11 +6,22 @@ interface AppProps {
 }
 
 export default function MenuButton({ menuActive, setMenuActive }: AppProps) {
+    //#region RENDER LOGIC
+
+    const getMenuButtonStyling = () => {
+        let styling = styles.menuButton;
+
+        if (menuActive) {
+            styling += " " + styles.active;
+        }
+
+        return styling;
+    };
+    //#endregion
+
     return (
         <div
-            className={`${styles.menuButton} ${
-                menuActive ? styles.active : ""
-            }`}
+            className={getMenuButtonStyling()}
             onClick={() => setMenuActive(!menuActive)}
         >
             <span className={styles.menuButton__bar}></span>
