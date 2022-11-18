@@ -153,7 +153,9 @@
     column-gap: 3vw;
 
     &__hidden {
-        filter: blur(0.375rem);
+        .optionButton {
+            color: transparent;
+        }
     }
 
     @media only screen and (max-width: shared.$mobileBreakpoint) {
@@ -169,6 +171,7 @@
     border: 5px solid transparent;
     border-radius: shared.$borderRadius;
 
+    // transition: color 0.3s ease;
     color: shared.$primary;
     font-size: 1.25rem;
 
