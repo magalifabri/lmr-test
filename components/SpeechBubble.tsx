@@ -7,13 +7,19 @@ interface AppProps {
     location: "sidebar" | "quiz";
     message?: string;
 }
+
 export default function SpeechBubble({
     active,
     setActive,
     location,
     message,
 }: AppProps) {
+    //#region VARIABLES
+
     const [randomAdvice, setRandomAdvice] = useState("");
+    //#endregion
+
+    //#region useEffects
 
     const getRandomAdvice = async () => {
         const res = await fetch("https://api.adviceslip.com/advice");
@@ -33,6 +39,9 @@ export default function SpeechBubble({
             }, 5000);
         }
     }, [active]);
+    //#endregion
+
+    //#region RENDER LOGIC
 
     const getContainerStyle = () => {
         let style: string = styles.container + " " + styles[location];
@@ -43,6 +52,7 @@ export default function SpeechBubble({
 
         return style;
     };
+    //#endregion
 
     return <div className={getContainerStyle()}>{message || randomAdvice}</div>;
 }
