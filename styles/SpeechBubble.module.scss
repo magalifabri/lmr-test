@@ -2,30 +2,43 @@
 
 .container {
     display: none;
-    position: relative;
-    top: 0.5rem;
-    left: 1rem;
-    width: 12.5rem;
 
-    padding: 0.5rem 0.75rem;
-
-    background-color: shared.$white;
-    border-radius: shared.$borderRadius;
-    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
-
-    &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 1rem;
-        transform: translateY(-95%);
-
-        border: 0.5rem solid transparent;
-        border-bottom: 0.5rem solid shared.$white;
+    // only show speech bubble on mobile in quiz or on desktop in sidebar
+    @media (max-width: shared.$mobileBreakpoint) {
+        &.quiz.active {
+            display: inline-block;
+        }
+    }
+    @media not all and (max-width: shared.$mobileBreakpoint) {
+        &.sidebar.active {
+            display: inline-block;
+        }
     }
 
     &.active {
         display: inline-block;
+        position: relative;
+        top: 0.5rem;
+        left: 1rem;
+        width: 12.5rem;
+
+        padding: 0.5rem 0.75rem;
+
+        background-color: shared.$white;
+        border-radius: shared.$borderRadius;
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 1rem;
+            transform: translateY(-95%);
+
+            border: 0.5rem solid transparent;
+            border-bottom: 0.5rem solid shared.$white;
+        }
+
         transform-origin: 0 0;
         animation: lifetime 5000ms ease both;
 

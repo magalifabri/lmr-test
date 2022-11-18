@@ -13,6 +13,8 @@ type AppProps = {
     gamePhase: GamePhase;
     setGamePhase: Function;
     menuActive: boolean;
+    speechBubbleActive: boolean;
+    setSpeechBubbleActive: Function;
 };
 
 export default function Quiz({
@@ -20,6 +22,8 @@ export default function Quiz({
     gamePhase,
     setGamePhase,
     menuActive,
+    speechBubbleActive,
+    setSpeechBubbleActive,
 }: AppProps) {
     //#region VARIABLES
 
@@ -32,7 +36,6 @@ export default function Quiz({
     const [secondsRemaining, setSecondsRemaining] = useState(
         question.time_limit_s
     );
-    const [speechBubbleActive, setSpeechBubbleActive] = useState(false);
     //#endregion
 
     //#region USE EFFECTS
@@ -215,11 +218,13 @@ export default function Quiz({
 
     return (
         <div className={styles.container}>
+            {/* avatar container present on mobile only */}
             <div className={getAvatarContainerStyle()}>
                 <Avatar />
                 <SpeechBubble
                     active={speechBubbleActive}
                     setActive={setSpeechBubbleActive}
+                    location={"quiz"}
                 />
             </div>
 

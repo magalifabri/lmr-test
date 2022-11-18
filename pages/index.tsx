@@ -39,6 +39,7 @@ type AppProps = {
 export default function Home({ quizData }: AppProps) {
     const [menuActive, setMenuActive] = useState(true);
     const [gamePhase, setGamePhase] = useState(GamePhase.GETTING_READY);
+    const [speechBubbleActive, setSpeechBubbleActive] = useState(false);
 
     return (
         <>
@@ -61,6 +62,8 @@ export default function Home({ quizData }: AppProps) {
                     setMenuActive={setMenuActive}
                     gamePhase={gamePhase}
                     setGamePhase={setGamePhase}
+                    speechBubbleActive={speechBubbleActive}
+                    setSpeechBubbleActive={setSpeechBubbleActive}
                 />
 
                 <Quiz
@@ -68,6 +71,8 @@ export default function Home({ quizData }: AppProps) {
                     gamePhase={gamePhase}
                     setGamePhase={setGamePhase}
                     menuActive={menuActive}
+                    speechBubbleActive={speechBubbleActive}
+                    setSpeechBubbleActive={setSpeechBubbleActive}
                 />
             </div>
         </>

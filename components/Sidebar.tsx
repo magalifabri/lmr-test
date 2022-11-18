@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Avatar from "./Avatar";
+import SpeechBubble from "./SpeechBubble";
 import { GamePhase } from "../pages";
 import styles from "../styles/Sidebar.module.scss";
 
@@ -7,6 +9,8 @@ type AppProps = {
     gamePhase: GamePhase;
     setMenuActive: Function;
     setGamePhase: Function;
+    speechBubbleActive: boolean;
+    setSpeechBubbleActive: Function;
 };
 
 export default function Sidebar({
@@ -14,6 +18,8 @@ export default function Sidebar({
     gamePhase,
     setMenuActive,
     setGamePhase,
+    speechBubbleActive,
+    setSpeechBubbleActive,
 }: AppProps) {
     //#region UI HANDLERS
 
@@ -64,6 +70,11 @@ export default function Sidebar({
 
                     <div className={styles.avatarContainer}>
                         <Avatar />
+                        <SpeechBubble
+                            active={speechBubbleActive}
+                            setActive={setSpeechBubbleActive}
+                            location={"sidebar"}
+                        />
                     </div>
                 </div>
 
