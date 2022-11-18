@@ -1,10 +1,10 @@
-import styles from "../styles/Quiz.module.scss";
+import { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 import SpeechBubble from "./SpeechBubble";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
 import { GamePhase } from "../pages/index";
-import { useEffect, useState } from "react";
+import styles from "../styles/Quiz.module.scss";
 
 const PRE_SELECTION_PHASE_DURATION_MS = 5000;
 
@@ -176,35 +176,41 @@ export default function Quiz({
 
     //#region RENDER LOGIC
 
-    const getStopwatchStyle = () => {
+    const getStopwatchStyling = () => {
+        let styling = styles.stopwatch;
+
         if (
             secondsRemaining <= 5 &&
             secondsRemaining > 0 &&
             gamePhase === GamePhase.SELECTION
         ) {
-            return `${styles.stopwatch} ${styles.timeAlmostUp}`;
-        } else {
-            return styles.stopwatch;
+            styling += " " + styles.timeAlmostUp;
         }
+
+        return styling;
     };
 
-    const getOptionsStyle = () => {
+    const getOptionsStyling = () => {
+        let styling = styles.options;
+
         if (
             gamePhase === GamePhase.GETTING_READY ||
             gamePhase === GamePhase.PRE_SELECTION
         ) {
-            return styles.options + " " + styles.options__hidden;
-        } else {
-            return styles.options;
+            styling += " " + styles.options__hidden;
         }
+
+        return styling;
     };
 
-    const getAvatarContainerStyle = () => {
-        if (menuActive) {
-            return styles.avatarContainer;
-        } else {
-            return styles.avatarContainer + " " + styles.active;
+    const getAvatarContainerStyling = () => {
+        let styling = styles.avatarContainer;
+
+        if (!menuActive) {
+            styling += " " + styles.active;
         }
+
+        return styling;
     };
 
     const getTipButtonDisabledState = () => {
@@ -219,7 +225,7 @@ export default function Quiz({
     return (
         <div className={styles.container}>
             {/* avatar container present on mobile only */}
-            <div className={getAvatarContainerStyle()}>
+            <div className={getAvatarContainerStyling()}>
                 <Avatar />
                 <SpeechBubble
                     active={speechBubbleActive}
@@ -235,7 +241,7 @@ export default function Quiz({
                             <div className={styles.countdownBar__fill}></div>
                         </div>
                     ) : (
-                        <div className={getStopwatchStyle()}>
+                        <div className={getStopwatchStyling()}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 448 512"
@@ -253,7 +259,7 @@ export default function Quiz({
 
                 <h1 className={styles.question}>{question.question}</h1>
 
-                <div className={getOptionsStyle()}>
+                <div className={getOptionsStyling()}>
                     {question.answers.map((answer) => (
                         <button
                             className={buttonStyles[answer.uid]?.join(" ")}
@@ -271,7 +277,9 @@ export default function Quiz({
 
                 {gamePhase === GamePhase.POST_SELECTION ? (
                     <button
-                        className={`${styles.bigButton} ${styles.bigButton__yellow}`}
+                        className={
+                            styles.bigButton + " " + styles.bigButton__yellow
+                        }
                         onClick={() => onProceedButtonClick()}
                     >
                         Doorgaan
@@ -280,9 +288,11 @@ export default function Quiz({
                     <>
                         <button
                             disabled={!numSelected}
-                            className={`${styles.bigButton} ${
-                                numSelected ? styles.bigButton__yellow : ""
-                            }`}
+                            className={
+                                styles.bigButton +
+                                " " +
+                                styles.bigButton__yellow
+                            }
                             onClick={() => onReadyButtonClick()}
                         >
                             Klaar!
@@ -290,7 +300,9 @@ export default function Quiz({
 
                         <button
                             disabled={getTipButtonDisabledState()}
-                            className={`${styles.bigButton} ${styles.bigButton__white}`}
+                            className={
+                                styles.bigButton + " " + styles.bigButton__white
+                            }
                             onClick={() => setSpeechBubbleActive(true)}
                         >
                             Geef me een tip...

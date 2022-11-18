@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Avatar from "./Avatar";
 import SpeechBubble from "./SpeechBubble";
 import { GamePhase } from "../pages";
@@ -31,21 +30,29 @@ export default function Sidebar({
 
     //#region RENDER LOGIC
 
-    const getStartButtonStyle = () => {
+    const getStartButtonStyling = () => {
+        let styling = styles.startButton;
+
         if (gamePhase === GamePhase.GETTING_READY) {
-            return styles.startButton + " " + styles.active;
-        } else {
-            return styles.startButton;
+            styling += " " + styles.active;
         }
+
+        return styling;
+    };
+
+    const getContainerStyling = () => {
+        let styling = styles.container;
+
+        if (menuActive) {
+            styling += " menuActive " + styles.active;
+        }
+
+        return styling;
     };
     //#endregion
 
     return (
-        <div
-            className={`${styles.container} ${
-                menuActive ? styles.active + " menuActive" : ""
-            }`}
-        >
+        <div className={getContainerStyling()}>
             <div className={styles.intro}>
                 <div className={styles.cover}>
                     <div className={styles.info}>
@@ -98,7 +105,7 @@ export default function Sidebar({
                         onClick={() => {
                             onStartButtonClick();
                         }}
-                        className={getStartButtonStyle()}
+                        className={getStartButtonStyling()}
                     >
                         Aan de slag!
                     </button>

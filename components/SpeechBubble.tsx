@@ -43,16 +43,18 @@ export default function SpeechBubble({
 
     //#region RENDER LOGIC
 
-    const getContainerStyle = () => {
-        let style: string = styles.container + " " + styles[location];
+    const getContainerStyling = () => {
+        let styling: string = styles.container + " " + styles[location];
 
         if (active) {
-            style += " " + styles.active;
+            styling += " " + styles.active;
         }
 
-        return style;
+        return styling;
     };
     //#endregion
 
-    return <div className={getContainerStyle()}>{message || randomAdvice}</div>;
+    return (
+        <div className={getContainerStyling()}>{message || randomAdvice}</div>
+    );
 }

@@ -4,10 +4,10 @@ export default function Avatar() {
     return (
         <>
             <div
-                className={`${styles.avatar} ${styles.avatar__background}`}
+                className={styles.avatar + " " + styles.avatar__background}
             ></div>
             <div
-                className={`${styles.avatar} ${styles.avatar__foreground}`}
+                className={styles.avatar + " " + styles.avatar__foreground}
             ></div>
         </>
     );
