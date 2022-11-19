@@ -19,7 +19,8 @@
         position: relative;
         top: 0.5rem;
         left: 1rem;
-        width: 12.5rem;
+        width: max-content;
+        max-width: 12.5rem;
 
         padding: 0.5rem 0.75rem;
 
