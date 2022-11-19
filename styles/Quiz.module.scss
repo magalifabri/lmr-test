@@ -154,7 +154,9 @@
 
     &__hidden {
         .optionButton {
+            text-shadow: 0 0 0.35rem #004475ac, 0rem 0 0.35rem #004475ac;
             color: transparent;
+            transition: none;
         }
     }
 
@@ -171,9 +173,11 @@
     border: 5px solid transparent;
     border-radius: shared.$borderRadius;
 
-    // transition: color 0.3s ease;
     color: shared.$primary;
     font-size: 1.25rem;
+
+    transition-property: text-shadow;
+    transition-duration: 0.5s;
 
     @media only screen and (max-width: shared.$mobileBreakpoint) {
         padding: 0.5rem;
