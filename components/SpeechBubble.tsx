@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { SpeechBubbleLocation, TIP } from "../interfaces/enums";
 import styles from "../styles/SpeechBubble.module.scss";
 
 interface AppProps {
-    location: "sidebar" | "quiz";
+    location: SpeechBubbleLocation;
     message: string;
     setMessage: Function;
 }
@@ -28,7 +29,7 @@ export default function SpeechBubble({
     }, [message]);
 
     const loadContent = async () => {
-        if (message === "tip") {
+        if (message === TIP) {
             const randomAdvice = await getRandomAdvice();
             setContent(randomAdvice);
         } else {

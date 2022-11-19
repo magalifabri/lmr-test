@@ -8,7 +8,7 @@ import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IAnswer from "../interfaces/IAnswer";
 import styles from "../styles/Home.module.scss";
 import SpeechBubble from "../components/SpeechBubble";
-import { GamePhase } from "../interfaces/enums";
+import { GamePhase, SpeechBubbleLocation } from "../interfaces/enums";
 
 // fetch quiz data from API
 export async function getServerSideProps() {
@@ -57,7 +57,7 @@ export default function Home({ quizData }: AppProps) {
                     setGamePhase={setGamePhase}
                 >
                     <SpeechBubble
-                        location={"sidebar"}
+                        location={SpeechBubbleLocation.SIDEBAR}
                         message={speechBubbleMessage}
                         setMessage={setSpeechBubbleMessage}
                     />

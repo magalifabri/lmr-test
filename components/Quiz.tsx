@@ -4,7 +4,7 @@ import SpeechBubble from "./SpeechBubble";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
 import styles from "../styles/Quiz.module.scss";
-import { GamePhase } from "../interfaces/enums";
+import { GamePhase, SpeechBubbleLocation, TIP } from "../interfaces/enums";
 
 const PRE_SELECTION_PHASE_DURATION_MS = 5000;
 
@@ -241,7 +241,7 @@ export default function Quiz({
             <div className={getAvatarContainerStyling()}>
                 <Avatar />
                 <SpeechBubble
-                    location={"quiz"}
+                    location={SpeechBubbleLocation.QUIZ}
                     message={speechBubbleMessage}
                     setMessage={setSpeechBubbleMessage}
                 />
@@ -316,7 +316,7 @@ export default function Quiz({
                             className={
                                 styles.bigButton + " " + styles.bigButton__white
                             }
-                            onClick={() => setSpeechBubbleMessage("tip")}
+                            onClick={() => setSpeechBubbleMessage(TIP)}
                         >
                             Geef me een tip...
                         </button>

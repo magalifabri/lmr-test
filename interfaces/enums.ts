@@ -4,3 +4,10 @@ export enum GamePhase {
     SELECTION,
     POST_SELECTION,
 }
+
+export enum SpeechBubbleLocation {
+    SIDEBAR = "sidebar",
+    QUIZ = "quiz",
+}
+
+export const TIP = "tip";
