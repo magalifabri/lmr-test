@@ -2,43 +2,53 @@ import { useEffect, useState } from "react";
 import styles from "../styles/SpeechBubble.module.scss";
 
 interface AppProps {
-    active: boolean;
-    setActive: Function;
     location: "sidebar" | "quiz";
-    message?: string;
+    message: string;
+    setMessage: Function;
 }
 
 export default function SpeechBubble({
-    active,
-    setActive,
     location,
     message,
+    setMessage,
 }: AppProps) {
     //#region VARIABLES
 
-    const [randomAdvice, setRandomAdvice] = useState("");
+    const [active, setActive] = useState(false);
+    const [content, setContent] = useState("");
     //#endregion
 
     //#region useEffects
 
-    const getRandomAdvice = async () => {
-        const res = await fetch("https://api.adviceslip.com/advice");
-        const advice = await res.json();
+    // set content of the speech bubble
+    useEffect(() => {
+        if (message) {
+            loadContent();
+        }
+    }, [message]);
 
-        setRandomAdvice(advice.slip.advice);
+    const loadContent = async () => {
+        if (message === "tip") {
+            const randomAdvice = await getRandomAdvice();
+            setContent(randomAdvice);
+        } else {
+            setContent(message);
+        }
+
+        setActive(true);
+
+        setTimeout(() => {
+            setActive(false);
+            setMessage("");
+        }, 5000);
     };
 
-    useEffect(() => {
-        if (active) {
-            if (!message) {
-                getRandomAdvice();
-            }
+    const getRandomAdvice = async () => {
+        const data = await fetch("https://api.adviceslip.com/advice");
+        const randomAdviceObj = await data.json();
 
-            setTimeout(() => {
-                setActive(false);
-            }, 5000);
-        }
-    }, [active]);
+        return randomAdviceObj.slip.advice;
+    };
     //#endregion
 
     //#region RENDER LOGIC
@@ -54,7 +64,5 @@ export default function SpeechBubble({
     };
     //#endregion
 
-    return (
-        <div className={getContainerStyling()}>{message || randomAdvice}</div>
-    );
+    return <div className={getContainerStyling()}>{content}</div>;
 }

@@ -1,14 +1,13 @@
 import { useState } from "react";
 import Head from "next/head";
 import { v4 as uuid } from "uuid";
-
 import Sidebar from "../components/Sidebar";
 import Quiz from "../components/Quiz";
 import MenuButton from "../components/MenuButton";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IAnswer from "../interfaces/IAnswer";
-
 import styles from "../styles/Home.module.scss";
+import SpeechBubble from "../components/SpeechBubble";
 
 // fetch quiz data from API
 export async function getServerSideProps() {
@@ -39,7 +38,7 @@ interface AppProps {
 export default function Home({ quizData }: AppProps) {
     const [menuActive, setMenuActive] = useState(true);
     const [gamePhase, setGamePhase] = useState(GamePhase.GETTING_READY);
-    const [speechBubbleActive, setSpeechBubbleActive] = useState(false);
+    const [speechBubbleMessage, setSpeechBubbleMessage] = useState("");
 
     return (
         <>
@@ -62,17 +61,21 @@ export default function Home({ quizData }: AppProps) {
                     setMenuActive={setMenuActive}
                     gamePhase={gamePhase}
                     setGamePhase={setGamePhase}
-                    speechBubbleActive={speechBubbleActive}
-                    setSpeechBubbleActive={setSpeechBubbleActive}
-                />
+                >
+                    <SpeechBubble
+                        location={"sidebar"}
+                        message={speechBubbleMessage}
+                        setMessage={setSpeechBubbleMessage}
+                    />
+                </Sidebar>
 
                 <Quiz
                     quizData={quizData}
                     gamePhase={gamePhase}
                     setGamePhase={setGamePhase}
                     menuActive={menuActive}
-                    speechBubbleActive={speechBubbleActive}
-                    setSpeechBubbleActive={setSpeechBubbleActive}
+                    speechBubbleMessage={speechBubbleMessage}
+                    setSpeechBubbleMessage={setSpeechBubbleMessage}
                 />
             </div>
         </>

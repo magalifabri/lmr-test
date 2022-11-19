@@ -13,8 +13,8 @@ interface AppProps {
     gamePhase: GamePhase;
     setGamePhase: Function;
     menuActive: boolean;
-    speechBubbleActive: boolean;
-    setSpeechBubbleActive: Function;
+    speechBubbleMessage: string;
+    setSpeechBubbleMessage: Function;
 }
 
 export default function Quiz({
@@ -22,8 +22,8 @@ export default function Quiz({
     gamePhase,
     setGamePhase,
     menuActive,
-    speechBubbleActive,
-    setSpeechBubbleActive,
+    speechBubbleMessage,
+    setSpeechBubbleMessage,
 }: AppProps) {
     //#region VARIABLES
 
@@ -105,6 +105,12 @@ export default function Quiz({
     //#endregion
 
     const endSelectionPhase = () => {
+        let numCorrectOptions = 0;
+        question.answers.forEach(
+            (answer) => answer.correct && numCorrectOptions++
+        );
+
+        let numCorrectlySelected = 0;
         // move to next game phase
         setGamePhase(GamePhase.POST_SELECTION);
 
@@ -115,6 +121,7 @@ export default function Quiz({
             if (answer.correct) {
                 if (buttonStyles[answer.uid].includes(styles.selected)) {
                     newButtonStyles[answer.uid].push(styles.correctlySelected);
+                    numCorrectlySelected++;
                 } else {
                     newButtonStyles[answer.uid].push(
                         styles.incorrectlyUnselected
@@ -128,6 +135,17 @@ export default function Quiz({
                 }
             }
         });
+
+        if (numCorrectOptions === numCorrectlySelected) {
+            setSpeechBubbleMessage("Goed gedaan!");
+        } else if (
+            numCorrectlySelected &&
+            numCorrectOptions > numCorrectlySelected
+        ) {
+            setSpeechBubbleMessage("Bijna!");
+        } else {
+            setSpeechBubbleMessage("Volgende keer beter!");
+        }
 
         setButtonStyles({ ...newButtonStyles });
     };
@@ -214,7 +232,7 @@ export default function Quiz({
     };
 
     const getTipButtonDisabledState = () => {
-        if (gamePhase !== GamePhase.SELECTION || speechBubbleActive) {
+        if (gamePhase !== GamePhase.SELECTION || speechBubbleMessage) {
             return true;
         } else {
             return false;
@@ -228,9 +246,9 @@ export default function Quiz({
             <div className={getAvatarContainerStyling()}>
                 <Avatar />
                 <SpeechBubble
-                    active={speechBubbleActive}
-                    setActive={setSpeechBubbleActive}
                     location={"quiz"}
+                    message={speechBubbleMessage}
+                    setMessage={setSpeechBubbleMessage}
                 />
             </div>
 
@@ -303,7 +321,7 @@ export default function Quiz({
                             className={
                                 styles.bigButton + " " + styles.bigButton__white
                             }
-                            onClick={() => setSpeechBubbleActive(true)}
+                            onClick={() => setSpeechBubbleMessage("tip")}
                         >
                             Geef me een tip...
                         </button>
