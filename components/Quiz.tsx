@@ -3,8 +3,8 @@ import Avatar from "./Avatar";
 import SpeechBubble from "./SpeechBubble";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
-import { GamePhase } from "../pages/index";
 import styles from "../styles/Quiz.module.scss";
+import { GamePhase } from "../interfaces/enums";
 
 const PRE_SELECTION_PHASE_DURATION_MS = 5000;
 

@@ -1,5 +1,5 @@
 import Avatar from "./Avatar";
-import { GamePhase } from "../pages";
+import { GamePhase } from "../interfaces/enums";
 import styles from "../styles/Sidebar.module.scss";
 
 interface AppProps {

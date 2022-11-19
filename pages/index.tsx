@@ -8,6 +8,7 @@ import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IAnswer from "../interfaces/IAnswer";
 import styles from "../styles/Home.module.scss";
 import SpeechBubble from "../components/SpeechBubble";
+import { GamePhase } from "../interfaces/enums";
 
 // fetch quiz data from API
 export async function getServerSideProps() {
@@ -22,13 +23,6 @@ export async function getServerSideProps() {
     });
 
     return { props: { quizData } };
-}
-
-export enum GamePhase {
-    GETTING_READY,
-    PRE_SELECTION,
-    SELECTION,
-    POST_SELECTION,
 }
 
 interface AppProps {
