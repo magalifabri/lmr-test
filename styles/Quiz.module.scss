@@ -127,7 +127,7 @@
 
         @keyframes deplete {
             from {
-                width: var(--timeRemainingPercentage, 100%);
+                width: 100%;
             }
             to {
                 width: 0%;

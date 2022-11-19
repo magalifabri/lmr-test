@@ -43,11 +43,6 @@ export default function Quiz({
     // set progress bar styling variables programmatically
     useEffect(() => {
         document.documentElement.style.setProperty(
-            "--timeRemainingPercentage",
-            "100%"
-        );
-
-        document.documentElement.style.setProperty(
             "--timeRemainingMs",
             `${PRE_SELECTION_PHASE_DURATION_MS}ms`
         );
