@@ -33,7 +33,9 @@ export default function SpeechBubble({
 
     // set content of the speech bubble
     useEffect(() => {
-        if (message) {
+        // check that message has a value and that content isn't already being
+        // displayed
+        if (message && !content) {
             loadContent();
         }
     }, [message]);
@@ -51,6 +53,7 @@ export default function SpeechBubble({
         setTimeout(() => {
             setActive(false);
             setMessage("");
+            setContent("");
         }, SPEECH_BUBBLE_DURATION_MS);
     };
 
