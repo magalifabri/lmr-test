@@ -100,16 +100,19 @@ export default function Quiz({
     //#endregion
 
     const endSelectionPhase = () => {
-        let numCorrectOptions = 0;
-        question.answers.forEach(
-            (answer) => answer.correct && numCorrectOptions++
-        );
-
-        let numCorrectlySelected = 0;
-        // move to next game phase
         setGamePhase(GamePhase.POST_SELECTION);
 
+        const [newButtonStyles, numCorrectlySelected] = checkAnswers();
+        setButtonStyles({ ...newButtonStyles });
+
+        const speechBubbleMessage =
+            selectSpeechBubbleMessage(numCorrectlySelected);
+        setSpeechBubbleMessage(speechBubbleMessage);
+    };
+
+    const checkAnswers = (): [IButtonStyles, number] => {
         const newButtonStyles = buttonStyles;
+        let numCorrectlySelected = 0;
 
         // assign styles to buttons to indicate correctness of selection state
         question.answers.forEach((answer) => {
@@ -131,18 +134,32 @@ export default function Quiz({
             }
         });
 
+        return [newButtonStyles, numCorrectlySelected];
+    };
+
+    const selectSpeechBubbleMessage = (numCorrectlySelected: number) => {
+        const numCorrectOptions = calcNumCorrectOptions();
+
         if (numCorrectOptions === numCorrectlySelected) {
-            setSpeechBubbleMessage("Goed gedaan!");
+            return "Goed gedaan!";
         } else if (
             numCorrectlySelected &&
             numCorrectOptions > numCorrectlySelected
         ) {
-            setSpeechBubbleMessage("Bijna!");
+            return "Bijna!";
         } else {
-            setSpeechBubbleMessage("Volgende keer beter!");
+            return "Volgende keer beter!";
         }
+    };
 
-        setButtonStyles({ ...newButtonStyles });
+    const calcNumCorrectOptions = () => {
+        let numCorrectOptions = 0;
+
+        question.answers.forEach(
+            (answer) => answer.correct && numCorrectOptions++
+        );
+
+        return numCorrectOptions;
     };
 
     const goToNextQuestion = () => {
