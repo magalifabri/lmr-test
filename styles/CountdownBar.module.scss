@@ -1,0 +1,27 @@
+@use "shared";
+
+.countdownBar {
+    height: 0.625rem;
+    width: 30%;
+    margin-top: 1.5rem;
+
+    border-radius: 0.15rem;
+    overflow: hidden;
+    background-color: shared.$primaryLighter1;
+
+    &__fill {
+        @include shared.progressBarFill;
+
+        animation: deplete var(--timeRemainingMs, 5000ms) linear both,
+            progressBarFillAnim 1.5s linear infinite;
+
+        @keyframes deplete {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0%;
+            }
+        }
+    }
+}

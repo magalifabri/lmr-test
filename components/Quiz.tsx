@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 import SpeechBubble from "./SpeechBubble";
+import CountdownBar from "./CountdownBar";
+import Stopwatch from "./Stopwatch";
+import Options from "./Options";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
+import {
+    GamePhase,
+    PRE_SELECTION_PHASE_DURATION_MS,
+    SpeechBubbleLocation,
+    TIP,
+} from "../interfaces/enums";
 import styles from "../styles/Quiz.module.scss";
-import { GamePhase, SpeechBubbleLocation, TIP } from "../interfaces/enums";
-
-const PRE_SELECTION_PHASE_DURATION_MS = 5000;
+import optionsStyles from "../styles/Options.module.scss";
 
 interface AppProps {
     quizData: Array<IQuizDataItem>;
@@ -38,26 +45,11 @@ export default function Quiz({
     );
     //#endregion
 
-    //#region USE EFFECTS
-
-    // set custom css variables programmatically
-    useEffect(() => {
-        document.documentElement.style.setProperty(
-            "--timeRemainingMs",
-            `${PRE_SELECTION_PHASE_DURATION_MS}ms`
-        );
-    }, []);
+    //#region useEffects
 
     useEffect(() => {
         if (gamePhase === GamePhase.PRE_SELECTION) {
             setPreSelectionPhaseTimer();
-        }
-
-        if (
-            gamePhase === GamePhase.GETTING_READY ||
-            gamePhase === GamePhase.PRE_SELECTION
-        ) {
-            initButtonsStyles();
         }
     }, [gamePhase]);
 
@@ -65,16 +57,6 @@ export default function Quiz({
         setTimeout(() => {
             setGamePhase(GamePhase.SELECTION);
         }, PRE_SELECTION_PHASE_DURATION_MS);
-    };
-
-    const initButtonsStyles = () => {
-        const newButtonStyles = buttonStyles;
-
-        question.answers.forEach((answer) => {
-            newButtonStyles[answer.uid] = [styles.optionButton];
-        });
-
-        setButtonStyles({ ...newButtonStyles });
     };
 
     // count down selection phase time remaining
@@ -117,18 +99,20 @@ export default function Quiz({
         // assign styles to buttons to indicate correctness of selection state
         question.answers.forEach((answer) => {
             if (answer.correct) {
-                if (buttonStyles[answer.uid].includes(styles.selected)) {
-                    newButtonStyles[answer.uid].push(styles.correctlySelected);
+                if (buttonStyles[answer.uid].includes(optionsStyles.selected)) {
+                    newButtonStyles[answer.uid].push(
+                        optionsStyles.correctlySelected
+                    );
                     numCorrectlySelected++;
                 } else {
                     newButtonStyles[answer.uid].push(
-                        styles.incorrectlyUnselected
+                        optionsStyles.incorrectlyUnselected
                     );
                 }
             } else {
-                if (buttonStyles[answer.uid].includes(styles.selected)) {
+                if (buttonStyles[answer.uid].includes(optionsStyles.selected)) {
                     newButtonStyles[answer.uid].push(
-                        styles.incorrectlySelected
+                        optionsStyles.incorrectlySelected
                     );
                 }
             }
@@ -178,7 +162,7 @@ export default function Quiz({
     const onAnswerSelect = (answerUid: string) => {
         const newButtonStyles = buttonStyles;
 
-        if (buttonStyles[answerUid].includes(styles.selected)) {
+        if (buttonStyles[answerUid].includes(optionsStyles.selected)) {
             newButtonStyles[answerUid].splice(
                 buttonStyles[answerUid].indexOf(answerUid),
                 1
@@ -187,7 +171,7 @@ export default function Quiz({
             setButtonStyles({ ...newButtonStyles });
             setNumSelected((prevState) => prevState - 1);
         } else {
-            newButtonStyles[answerUid].push(styles.selected);
+            newButtonStyles[answerUid].push(optionsStyles.selected);
 
             setButtonStyles({ ...newButtonStyles });
             setNumSelected((prevState) => prevState + 1);
@@ -205,33 +189,6 @@ export default function Quiz({
     //#endregion
 
     //#region RENDER LOGIC
-
-    const getStopwatchStyling = () => {
-        let styling = styles.stopwatch;
-
-        if (
-            secondsRemaining <= 5 &&
-            secondsRemaining > 0 &&
-            gamePhase === GamePhase.SELECTION
-        ) {
-            styling += " " + styles.timeAlmostUp;
-        }
-
-        return styling;
-    };
-
-    const getOptionsStyling = () => {
-        let styling = styles.options;
-
-        if (
-            gamePhase === GamePhase.GETTING_READY ||
-            gamePhase === GamePhase.PRE_SELECTION
-        ) {
-            styling += " " + styles.options__hidden;
-        }
-
-        return styling;
-    };
 
     const getAvatarContainerStyling = () => {
         let styling = styles.avatarContainer;
@@ -267,43 +224,24 @@ export default function Quiz({
             <div className={styles.innerContainer}>
                 <div className={styles.timerContainer}>
                     {gamePhase === GamePhase.PRE_SELECTION ? (
-                        <div className={styles.countdownBar}>
-                            <div className={styles.countdownBar__fill}></div>
-                        </div>
+                        <CountdownBar />
                     ) : (
-                        <div className={getStopwatchStyling()}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 448 512"
-                            >
-                                {/* <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --> */}
-                                <path d="M432 304c0 114.9-93.1 208-208 208S16 418.9 16 304c0-104 76.3-190.2 176-205.5V64h-28c-6.6 0-12-5.4-12-12V12c0-6.6 5.4-12 12-12h120c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-28v34.5c37.5 5.8 71.7 21.6 99.7 44.6l27.5-27.5c4.7-4.7 12.3-4.7 17 0l28.3 28.3c4.7 4.7 4.7 12.3 0 17l-29.4 29.4-.6.6C419.7 223.3 432 262.2 432 304zm-176 36V188.5c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12V340c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12z" />
-                            </svg>
-                            0:
-                            {secondsRemaining >= 10
-                                ? secondsRemaining
-                                : "0" + secondsRemaining}
-                        </div>
+                        <Stopwatch
+                            gamePhase={gamePhase}
+                            secondsRemaining={secondsRemaining}
+                        />
                     )}
                 </div>
 
                 <h1 className={styles.question}>{question.question}</h1>
 
-                <div className={getOptionsStyling()}>
-                    {question.answers.map((answer) => (
-                        <button
-                            className={buttonStyles[answer.uid]?.join(" ")}
-                            key={answer.uid}
-                            disabled={gamePhase !== GamePhase.SELECTION}
-                            id={answer.uid}
-                            onClick={(e) => {
-                                onAnswerSelect((e.target as HTMLElement).id);
-                            }}
-                        >
-                            {answer.answer}
-                        </button>
-                    ))}
-                </div>
+                <Options
+                    question={question}
+                    buttonStyles={buttonStyles}
+                    setButtonStyles={setButtonStyles}
+                    gamePhase={gamePhase}
+                    onAnswerSelect={onAnswerSelect}
+                />
 
                 {gamePhase === GamePhase.POST_SELECTION ? (
                     <button

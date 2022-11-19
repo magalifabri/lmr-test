@@ -11,3 +11,4 @@ export enum SpeechBubbleLocation {
 }
 
 export const TIP = "tip";
+export const PRE_SELECTION_PHASE_DURATION_MS = 5000;

@@ -1,0 +1,57 @@
+@use "shared";
+
+.stopwatch {
+    width: 7rem;
+    height: 100%;
+    padding-left: 1.125rem;
+
+    background-color: shared.$white;
+    border-radius: 3rem;
+    border: 3px solid transparent;
+    @include shared.boxShadow(shared.$primary);
+
+    color: shared.$primary;
+    font-weight: bold;
+    font-size: 1.25rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    svg {
+        height: 17px;
+        fill: currentColor;
+    }
+
+    &.timeAlmostUp {
+        animation: flashRed 1s linear infinite;
+
+        @keyframes flashRed {
+            0%,
+            100% {
+                border-color: transparent;
+                color: shared.$primary;
+            }
+            50% {
+                border-color: shared.$red;
+                color: shared.$red;
+            }
+        }
+
+        svg {
+            animation: pulse 1s infinite;
+
+            @keyframes pulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                    fill: currentColor;
+                }
+                50% {
+                    transform: scale(1.5);
+                    fill: shared.$red;
+                }
+            }
+        }
+    }
+}
