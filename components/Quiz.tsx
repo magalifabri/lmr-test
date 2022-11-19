@@ -40,7 +40,7 @@ export default function Quiz({
 
     //#region USE EFFECTS
 
-    // set progress bar styling variables programmatically
+    // set custom css variables programmatically
     useEffect(() => {
         document.documentElement.style.setProperty(
             "--timeRemainingMs",

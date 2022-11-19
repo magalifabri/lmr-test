@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { SpeechBubbleLocation, TIP } from "../interfaces/enums";
 import styles from "../styles/SpeechBubble.module.scss";
 
+const SPEECH_BUBBLE_DURATION_MS = 5000;
+
 interface AppProps {
     location: SpeechBubbleLocation;
     message: string;
@@ -20,6 +22,14 @@ export default function SpeechBubble({
     //#endregion
 
     //#region useEffects
+
+    // set custom css variables programmatically
+    useEffect(() => {
+        document.documentElement.style.setProperty(
+            "--speechBubbleDurationMs",
+            `${SPEECH_BUBBLE_DURATION_MS}ms`
+        );
+    }, []);
 
     // set content of the speech bubble
     useEffect(() => {
@@ -41,7 +51,7 @@ export default function SpeechBubble({
         setTimeout(() => {
             setActive(false);
             setMessage("");
-        }, 5000);
+        }, SPEECH_BUBBLE_DURATION_MS);
     };
 
     const getRandomAdvice = async () => {

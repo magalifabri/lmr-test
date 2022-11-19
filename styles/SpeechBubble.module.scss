@@ -39,7 +39,7 @@
         }
 
         transform-origin: 0 0;
-        animation: lifetime 5000ms ease both;
+        animation: lifetime var(--speechBubbleDurationMs, 5000ms) ease both;
 
         @keyframes lifetime {
             0% {
