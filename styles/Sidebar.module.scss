@@ -179,6 +179,23 @@ $borderRadius: 0.5rem;
         border: none;
         border-radius: shared.$borderRadius;
         @include shared.boxShadow(shared.$accentDarker2);
+
+        animation: gelatine 1s infinite;
+        @keyframes gelatine {
+            0%,
+            75% {
+                transform: scale(1, 1);
+            }
+            12.5% {
+                transform: scale(0.9, 1.1);
+            }
+            25% {
+                transform: scale(1.1, 0.9);
+            }
+            50% {
+                transform: scale(0.95, 1.05);
+            }
+        }
     }
 }
 
