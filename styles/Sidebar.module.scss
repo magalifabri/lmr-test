@@ -100,13 +100,10 @@ $borderRadius: 0.5rem;
     &.active {
         display: inline-block;
         height: 48px;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
         margin-bottom: 1rem;
 
-        color: shared.$primary;
         background-color: shared.$accent;
-        border: none;
-        border-radius: shared.$borderRadius;
         @include shared.boxShadow(shared.$accentDarker2);
 
         animation: gelatine 1s infinite;

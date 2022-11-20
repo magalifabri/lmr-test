@@ -10,8 +10,6 @@
     width: 52px;
 
     background-color: shared.$primary;
-    border: none;
-    border-radius: shared.$borderRadius;
     @include shared.boxShadow(shared.$primaryDarker1);
 
     display: grid;
@@ -24,17 +22,13 @@
     }
 }
 
-.bigButton {
+.mapButton {
     flex: 1;
     height: 48px;
     padding: 0 0.5rem;
 
     background-color: shared.$accent;
-    border: none;
-    border-radius: shared.$borderRadius;
     @include shared.boxShadow(shared.$accentDarker2);
-
-    color: shared.$primary;
 
     display: flex;
     gap: 0.5rem;

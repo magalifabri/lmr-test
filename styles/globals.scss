@@ -77,7 +77,11 @@ button {
     font-family: "FlandersArtSans", sans-serif;
     font-weight: bold;
     font-size: 1rem;
+    color: shared.$primary;
 
     transition: color 0.1s, background-color 0.1s, border 0.1s;
     user-select: none;
+
+    border: none;
+    border-radius: shared.$borderRadius;
 }
