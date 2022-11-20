@@ -72,60 +72,6 @@ $borderRadius: 0.5rem;
     gap: 0.625rem;
 }
 
-.timer,
-.level {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    color: shared.$white;
-    font-weight: bold;
-
-    background-color: shared.$primaryLighter2;
-    border-radius: shared.$borderRadiusSmaller1;
-    @include shared.boxShadow(shared.$primary);
-}
-
-.timer {
-    padding-left: 0.75rem;
-    width: 5.25rem;
-
-    svg {
-        height: 0.875rem;
-        fill: currentColor;
-    }
-}
-
-.level {
-    flex: 1;
-    padding: 0.25rem;
-    padding-right: 0.5rem;
-
-    display: flex;
-
-    // mobile: make space for menu button
-    @media only screen and (max-width: 400px) {
-        margin-right: 2.25rem;
-    }
-}
-
-.progressBar {
-    flex: 1;
-    height: 100%;
-
-    background-color: shared.$primaryLighter1;
-    border-radius: shared.$borderRadiusSmaller1;
-
-    &__fill {
-        width: 20%;
-
-        border-radius: inherit;
-
-        @include shared.progressBarFill;
-        animation: progressBarFillAnim 1.5s linear infinite;
-    }
-}
-
 .avatarContainer {
     position: absolute;
     height: 125px;
@@ -136,7 +82,7 @@ $borderRadius: 0.5rem;
     transform: translate(-50%, 15%);
 }
 
-.text {
+.content {
     flex: 1;
     padding: 1rem;
     padding-top: 3rem;
@@ -146,23 +92,6 @@ $borderRadius: 0.5rem;
 
     background-color: shared.$white;
     border-radius: 0 0 $borderRadius $borderRadius;
-
-    p {
-        padding-bottom: 1.5rem;
-        font-size: 1.125rem;
-        line-height: 1.4;
-    }
-
-    b {
-        font-weight: 500;
-    }
-}
-
-.line {
-    border: none;
-    border-top: 2px solid shared.$primaryLighter2;
-    width: 33%;
-    margin: 0.875rem auto 1rem;
 }
 
 .startButton {
@@ -196,52 +125,5 @@ $borderRadius: 0.5rem;
                 transform: scale(0.95, 1.05);
             }
         }
-    }
-}
-
-.navigation {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.button {
-    height: 48px;
-    width: 52px;
-
-    background-color: shared.$primary;
-    border: none;
-    border-radius: shared.$borderRadius;
-    @include shared.boxShadow(shared.$primaryDarker1);
-
-    display: grid;
-    place-items: center;
-
-    svg {
-        max-height: 20px;
-        max-width: 25px;
-        fill: shared.$white;
-    }
-}
-
-.bigButton {
-    flex: 1;
-    height: 48px;
-    padding: 0 0.5rem;
-
-    background-color: shared.$accent;
-    border: none;
-    border-radius: shared.$borderRadius;
-    @include shared.boxShadow(shared.$accentDarker2);
-
-    color: shared.$primary;
-
-    display: flex;
-    gap: 0.5rem;
-    justify-content: space-around;
-    align-items: center;
-
-    svg {
-        height: 20px;
-        fill: currentColor;
     }
 }

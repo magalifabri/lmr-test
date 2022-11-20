@@ -35,7 +35,7 @@ html {
 
 body {
     flex: 1; // fill viewport width
-    display: flex; // make children (=Home) fill viewport height
+    display: flex; // make children (= Home) fill viewport height
 
     // desktop
     @media only screen and (min-width: calc(shared.$mobileBreakpoint + 1px)) {
@@ -61,6 +61,16 @@ body {
 
 h1 {
     font-size: 1.5rem;
+}
+
+p {
+    padding-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.4;
+}
+
+b {
+    font-weight: 500;
 }
 
 button {

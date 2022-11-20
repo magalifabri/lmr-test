@@ -1,0 +1,33 @@
+@use "shared";
+
+.level {
+    @include shared.coverInfoBlock;
+
+    flex: 1;
+    padding: 0.25rem;
+    padding-right: 0.5rem;
+
+    display: flex;
+
+    // mobile: make space for menu button
+    @media only screen and (max-width: 400px) {
+        margin-right: 2.25rem;
+    }
+}
+
+.progressBar {
+    flex: 1;
+    height: 100%;
+
+    background-color: shared.$primaryLighter1;
+    border-radius: shared.$borderRadiusSmaller1;
+
+    &__fill {
+        width: 20%;
+
+        border-radius: inherit;
+
+        @include shared.progressBarFill;
+        animation: progressBarFillAnim 1.5s linear infinite;
+    }
+}

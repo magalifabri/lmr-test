@@ -1,0 +1,48 @@
+@use "shared";
+
+.navigation {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button {
+    height: 48px;
+    width: 52px;
+
+    background-color: shared.$primary;
+    border: none;
+    border-radius: shared.$borderRadius;
+    @include shared.boxShadow(shared.$primaryDarker1);
+
+    display: grid;
+    place-items: center;
+
+    svg {
+        max-height: 20px;
+        max-width: 25px;
+        fill: shared.$white;
+    }
+}
+
+.bigButton {
+    flex: 1;
+    height: 48px;
+    padding: 0 0.5rem;
+
+    background-color: shared.$accent;
+    border: none;
+    border-radius: shared.$borderRadius;
+    @include shared.boxShadow(shared.$accentDarker2);
+
+    color: shared.$primary;
+
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-around;
+    align-items: center;
+
+    svg {
+        height: 20px;
+        fill: currentColor;
+    }
+}

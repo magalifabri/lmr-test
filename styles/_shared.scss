@@ -47,6 +47,19 @@ $mobileBreakpoint: 800px;
     );
     background-size: 2rem 2rem;
 }
+
+@mixin coverInfoBlock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    color: $white;
+    font-weight: bold;
+
+    background-color: $primaryLighter2;
+    border-radius: $borderRadiusSmaller1;
+    @include boxShadow($primary);
+}
 // #endregion
 
 // #region ANIMATIONS

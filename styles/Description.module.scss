@@ -1,0 +1,8 @@
+@use "shared";
+
+.line {
+    border: none;
+    border-top: 2px solid shared.$primaryLighter2;
+    width: 33%;
+    margin: 0.875rem auto 1rem;
+}

@@ -1,0 +1,13 @@
+@use "shared";
+
+.timer {
+    @include shared.coverInfoBlock;
+
+    padding-left: 0.75rem;
+    width: 5.25rem;
+
+    svg {
+        height: 0.875rem;
+        fill: currentColor;
+    }
+}
