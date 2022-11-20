@@ -55,6 +55,23 @@
         &.incorrectlySelected {
             border-color: shared.$red;
         }
+
+        animation: jiggle 0.75s;
+        @keyframes jiggle {
+            0%,
+            75% {
+                transform: scale(1, 1);
+            }
+            12.5% {
+                transform: scale(1.05, 0.95);
+            }
+            25% {
+                transform: scale(0.95, 1.05);
+            }
+            50% {
+                transform: scale(1.025, 0.925);
+            }
+        }
     }
     &.incorrectlyUnselected {
         border-color: shared.$red;
