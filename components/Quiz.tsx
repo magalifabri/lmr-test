@@ -84,17 +84,21 @@ export default function Quiz({
     const endSelectionPhase = () => {
         setGamePhase(GamePhase.POST_SELECTION);
 
-        const [newButtonStyles, numCorrectlySelected] = checkAnswers();
+        const [newButtonStyles, numCorrectlySelected, numIncorrectlySelected] =
+            checkAnswers();
         setButtonStyles({ ...newButtonStyles });
 
-        const speechBubbleMessage =
-            selectSpeechBubbleMessage(numCorrectlySelected);
+        const speechBubbleMessage = selectSpeechBubbleMessage(
+            numCorrectlySelected,
+            numIncorrectlySelected
+        );
         setSpeechBubbleMessage(speechBubbleMessage);
     };
 
-    const checkAnswers = (): [IButtonStyles, number] => {
+    const checkAnswers = (): [IButtonStyles, number, number] => {
         const newButtonStyles = buttonStyles;
         let numCorrectlySelected = 0;
+        let numIncorrectlySelected = 0;
 
         // assign styles to buttons to indicate correctness of selection state
         question.answers.forEach((answer) => {
@@ -114,21 +118,30 @@ export default function Quiz({
                     newButtonStyles[answer.uid].push(
                         optionsStyles.incorrectlySelected
                     );
+                    numIncorrectlySelected++;
                 }
             }
         });
 
-        return [newButtonStyles, numCorrectlySelected];
+        return [newButtonStyles, numCorrectlySelected, numIncorrectlySelected];
     };
 
-    const selectSpeechBubbleMessage = (numCorrectlySelected: number) => {
+    const selectSpeechBubbleMessage = (
+        numCorrectlySelected: number,
+        numIncorrectlySelected: number
+    ) => {
         const numCorrectOptions = calcNumCorrectOptions();
 
-        if (numCorrectOptions === numCorrectlySelected) {
+        if (
+            numCorrectOptions === numCorrectlySelected &&
+            !numIncorrectlySelected
+        ) {
             return "Goed gedaan!";
         } else if (
-            numCorrectlySelected &&
-            numCorrectOptions > numCorrectlySelected
+            numIncorrectlySelected <= 1 &&
+            (numCorrectlySelected === numCorrectOptions ||
+                numCorrectlySelected + 1 === numCorrectOptions ||
+                numCorrectlySelected - 1 === numCorrectOptions)
         ) {
             return "Bijna!";
         } else {
