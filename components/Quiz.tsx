@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Avatar from "./Avatar";
 import SpeechBubble from "./SpeechBubble";
 import CountdownBar from "./CountdownBar";
@@ -248,6 +248,21 @@ export default function Quiz({
             },
         },
     };
+
+    const buttonsContainerVariant = {
+        initial: {
+            scaleY: 0,
+            opacity: 0,
+        },
+        animate: {
+            scaleY: 1,
+            opacity: 1,
+        },
+        exit: {
+            scaleX: 0,
+            opacity: 0,
+        },
+    };
     //#endregion
 
     return (
@@ -291,40 +306,64 @@ export default function Quiz({
                     onAnswerSelect={onAnswerSelect}
                 />
 
-                {gamePhase === GamePhase.POST_SELECTION ? (
-                    <button
-                        className={
-                            styles.bigButton + " " + styles.bigButton__yellow
-                        }
-                        onClick={() => onProceedButtonClick()}
-                    >
-                        Doorgaan
-                    </button>
-                ) : (
-                    <>
-                        <button
-                            disabled={!numSelected}
-                            className={
-                                styles.bigButton +
-                                " " +
-                                styles.bigButton__yellow
-                            }
-                            onClick={() => onReadyButtonClick()}
+                <AnimatePresence exitBeforeEnter initial={false}>
+                    {gamePhase === GamePhase.POST_SELECTION ? (
+                        <motion.div
+                            className={styles.buttonsContainer}
+                            key="buttons1"
+                            layout
+                            variants={buttonsContainerVariant}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
                         >
-                            Klaar!
-                        </button>
+                            <button
+                                className={
+                                    styles.bigButton +
+                                    " " +
+                                    styles.bigButton__yellow
+                                }
+                                onClick={() => onProceedButtonClick()}
+                            >
+                                Doorgaan
+                            </button>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            className={styles.buttonsContainer}
+                            key="buttons2"
+                            layout
+                            variants={buttonsContainerVariant}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                        >
+                            <button
+                                disabled={!numSelected}
+                                className={
+                                    styles.bigButton +
+                                    " " +
+                                    styles.bigButton__yellow
+                                }
+                                onClick={() => onReadyButtonClick()}
+                            >
+                                Klaar!
+                            </button>
 
-                        <button
-                            disabled={getTipButtonDisabledState()}
-                            className={
-                                styles.bigButton + " " + styles.bigButton__white
-                            }
-                            onClick={() => setSpeechBubbleMessage(TIP)}
-                        >
-                            Geef me een tip...
-                        </button>
-                    </>
-                )}
+                            <button
+                                disabled={getTipButtonDisabledState()}
+                                className={
+                                    styles.bigButton +
+                                    " " +
+                                    styles.bigButton__white
+                                }
+                                onClick={() => setSpeechBubbleMessage(TIP)}
+                            >
+                                Geef me een tip...
+                            </button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </div>
     );
