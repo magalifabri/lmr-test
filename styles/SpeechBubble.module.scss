@@ -28,9 +28,8 @@
 
     &.active {
         position: relative;
-        top: 0.5rem;
         width: max-content;
-        max-width: 12.5rem;
+        max-width: 15rem;
         padding: 0.5rem 0.75rem;
 
         border-radius: shared.$borderRadius;
@@ -51,13 +50,16 @@
     @media (max-width: shared.$mobileBreakpoint) {
         &.quiz.active {
             display: inline-block;
+            left: 4rem;
+            top: -1.75rem;
+
             background-color: shared.$white;
-            left: 1rem;
 
             &::after {
-                left: 1rem;
-                transform: translateY(-95%);
-                border-bottom: 0.5rem solid shared.$white;
+                left: 0;
+                top: 0.5rem;
+                transform: translateX(-95%);
+                border-right: 0.5rem solid shared.$white;
             }
 
             transform-origin: 0 0;
@@ -67,19 +69,22 @@
     @media not all and (max-width: shared.$mobileBreakpoint) {
         &.sidebar.active {
             display: inline-block;
-            background-color: shared.$primaryLighter1;
-            color: shared.$white;
+            top: 0.5rem;
             left: 50%;
-            text-align: center;
 
-            transform-origin: 50% 0;
-            @include lifetime(translateX(-50%));
+            background-color: shared.$primaryLighter1;
+
+            text-align: center;
+            color: shared.$white;
 
             &::after {
                 border-bottom: 0.5rem solid shared.$primaryLighter1;
                 left: 50%;
                 transform: translateX(-50%) translateY(-95%);
             }
+
+            transform-origin: 50% 0;
+            @include lifetime(translateX(-50%));
         }
     }
 }
