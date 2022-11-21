@@ -289,14 +289,24 @@ export default function Quiz({
                             <Stopwatch
                                 gamePhase={gamePhase}
                                 secondsRemaining={secondsRemaining}
-                                key="Stopwatch" // required by AnimatePresence
+                                key="Stopwatch"
                                 animationProps={timerVariant}
                             />
                         )}
                     </AnimatePresence>
                 </div>
 
-                <h1 className={styles.question}>{question.question}</h1>
+                <AnimatePresence exitBeforeEnter>
+                    <motion.h1
+                        key={question.question}
+                        initial={{ scaleY: 0, opacity: 0 }}
+                        animate={{ scaleY: 1, opacity: 1 }}
+                        exit={{ scaleY: 0, opacity: 0 }}
+                        className={styles.question}
+                    >
+                        {question.question}
+                    </motion.h1>
+                </AnimatePresence>
 
                 <Options
                     question={question}
