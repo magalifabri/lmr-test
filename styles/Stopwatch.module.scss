@@ -6,6 +6,14 @@
     height: 2.75rem;
     padding-left: 1.125rem;
 
+    @media only screen and (max-width: shared.$mobileBreakpoint) {
+        position: fixed;
+        top: 0;
+        height: 1.75rem;
+        width: 6rem;
+        padding-left: 0.75rem;
+    }
+
     background-color: shared.$white;
     border-radius: 3rem;
     border: 3px solid transparent;

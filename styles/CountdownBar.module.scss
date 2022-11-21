@@ -10,6 +10,13 @@
     overflow: hidden;
     background-color: shared.$primaryLighter1;
 
+    @media only screen and (max-width: shared.$mobileBreakpoint) {
+        position: fixed;
+        top: 0;
+        margin-top: 0;
+        background-color: shared.$primaryLighter2;
+    }
+
     &__fill {
         @include shared.progressBarFill;
 
