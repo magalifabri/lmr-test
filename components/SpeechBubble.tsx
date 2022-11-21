@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { SpeechBubbleLocation, TIP } from "../interfaces/enums";
 import styles from "../styles/SpeechBubble.module.scss";
 
-const SPEECH_BUBBLE_DURATION_MS = 5000;
+const SPEECH_BUBBLE_DURATION_MS = 7500;
 
 interface AppProps {
     location: SpeechBubbleLocation;
