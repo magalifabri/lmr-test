@@ -138,13 +138,6 @@ export default function Quiz({
             !numIncorrectlySelected
         ) {
             return "Goed gedaan!";
-        } else if (
-            numIncorrectlySelected <= 1 &&
-            (numCorrectlySelected === numCorrectOptions ||
-                numCorrectlySelected + 1 === numCorrectOptions ||
-                numCorrectlySelected - 1 === numCorrectOptions)
-        ) {
-            return "Bijna!";
         } else {
             return "Volgende keer beter!";
         }
