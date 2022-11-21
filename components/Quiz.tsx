@@ -225,7 +225,7 @@ export default function Quiz({
 
     //#region FRAMER MOTION VARIANTS
 
-    const animationProps = {
+    const timerVariant = {
         initial: {
             y: -100,
             opacity: 0,
@@ -283,14 +283,14 @@ export default function Quiz({
                         {gamePhase === GamePhase.PRE_SELECTION ? (
                             <CountdownBar
                                 key="CountdownBar" // required by AnimatePresence
-                                animationProps={animationProps}
+                                animationProps={timerVariant}
                             />
                         ) : (
                             <Stopwatch
                                 gamePhase={gamePhase}
                                 secondsRemaining={secondsRemaining}
                                 key="Stopwatch" // required by AnimatePresence
-                                animationProps={animationProps}
+                                animationProps={timerVariant}
                             />
                         )}
                     </AnimatePresence>
