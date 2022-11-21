@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import Avatar from "./Avatar";
 import SpeechBubble from "./SpeechBubble";
 import CountdownBar from "./CountdownBar";
@@ -222,6 +223,33 @@ export default function Quiz({
     };
     //#endregion
 
+    //#region FRAMER MOTION VARIANTS
+
+    const animationProps = {
+        initial: {
+            y: -100,
+            opacity: 0,
+        },
+        animate: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                delay: 0.5,
+                type: "spring",
+                bounce: 0.5,
+            },
+        },
+        exit: {
+            scale: 0,
+            opacity: 0,
+            transition: {
+                duration: 1,
+            },
+        },
+    };
+    //#endregion
+
     return (
         <div className={styles.container}>
             {/* avatar container present on mobile only */}
@@ -236,14 +264,21 @@ export default function Quiz({
 
             <div className={styles.innerContainer}>
                 <div className={styles.timerContainer}>
-                    {gamePhase === GamePhase.PRE_SELECTION ? (
-                        <CountdownBar />
-                    ) : (
-                        <Stopwatch
-                            gamePhase={gamePhase}
-                            secondsRemaining={secondsRemaining}
-                        />
-                    )}
+                    <AnimatePresence>
+                        {gamePhase === GamePhase.PRE_SELECTION ? (
+                            <CountdownBar
+                                key="CountdownBar" // required by AnimatePresence
+                                animationProps={animationProps}
+                            />
+                        ) : (
+                            <Stopwatch
+                                gamePhase={gamePhase}
+                                secondsRemaining={secondsRemaining}
+                                key="Stopwatch" // required by AnimatePresence
+                                animationProps={animationProps}
+                            />
+                        )}
+                    </AnimatePresence>
                 </div>
 
                 <h1 className={styles.question}>{question.question}</h1>

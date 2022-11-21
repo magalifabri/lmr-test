@@ -1,8 +1,9 @@
 @use "shared";
 
 .countdownBar {
+    position: absolute;
     height: 0.625rem;
-    width: 30%;
+    width: 12rem;
     margin-top: 1.5rem;
 
     border-radius: 0.15rem;
