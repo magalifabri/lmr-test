@@ -48,7 +48,10 @@
 .timerContainer {
     position: relative;
     width: 100%;
-    height: 1.5rem;
+    height: 2.75rem;
+    @media only screen and (max-width: shared.$mobileBreakpoint) {
+        height: 1.5rem;
+    }
     margin-bottom: 1.5rem;
 
     display: flex;
