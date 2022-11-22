@@ -8,7 +8,11 @@ import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IAnswer from "../interfaces/IAnswer";
 import styles from "../styles/Home.module.scss";
 import SpeechBubble from "../components/SpeechBubble";
-import { GamePhase, SpeechBubbleLocation } from "../interfaces/enums";
+import {
+    GamePhase,
+    SpeechBubbleLocation,
+    SpeechBubbleParam,
+} from "../interfaces/enums";
 
 // fetch quiz data from API
 export async function getServerSideProps() {
@@ -32,7 +36,9 @@ interface AppProps {
 export default function Home({ quizData }: AppProps) {
     const [menuActive, setMenuActive] = useState(true);
     const [gamePhase, setGamePhase] = useState(GamePhase.GETTING_READY);
-    const [speechBubbleMessage, setSpeechBubbleMessage] = useState("");
+    const [speechBubbleParam, setSpeechBubbleParam] = useState(
+        SpeechBubbleParam.OFF
+    );
 
     return (
         <>
@@ -58,8 +64,8 @@ export default function Home({ quizData }: AppProps) {
                 >
                     <SpeechBubble
                         location={SpeechBubbleLocation.SIDEBAR}
-                        message={speechBubbleMessage}
-                        setMessage={setSpeechBubbleMessage}
+                        param={speechBubbleParam}
+                        setParam={setSpeechBubbleParam}
                     />
                 </Sidebar>
 
@@ -68,8 +74,8 @@ export default function Home({ quizData }: AppProps) {
                     gamePhase={gamePhase}
                     setGamePhase={setGamePhase}
                     menuActive={menuActive}
-                    speechBubbleMessage={speechBubbleMessage}
-                    setSpeechBubbleMessage={setSpeechBubbleMessage}
+                    speechBubbleParam={speechBubbleParam}
+                    setSpeechBubbleParam={setSpeechBubbleParam}
                 />
             </div>
         </>

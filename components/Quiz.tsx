@@ -14,7 +14,7 @@ import {
     GamePhase,
     PRE_SELECTION_PHASE_DURATION_MS,
     SpeechBubbleLocation,
-    TIP,
+    SpeechBubbleParam,
 } from "../interfaces/enums";
 import styles from "../styles/Quiz.module.scss";
 import optionsStyles from "../styles/Options.module.scss";
@@ -24,8 +24,8 @@ interface AppProps {
     gamePhase: GamePhase;
     setGamePhase: Function;
     menuActive: boolean;
-    speechBubbleMessage: string;
-    setSpeechBubbleMessage: Function;
+    speechBubbleParam: SpeechBubbleParam;
+    setSpeechBubbleParam: Function;
 }
 
 export default function Quiz({
@@ -33,8 +33,8 @@ export default function Quiz({
     gamePhase,
     setGamePhase,
     menuActive,
-    speechBubbleMessage,
-    setSpeechBubbleMessage,
+    speechBubbleParam,
+    setSpeechBubbleParam,
 }: AppProps) {
     //#region VARIABLES
 
@@ -100,7 +100,7 @@ export default function Quiz({
         );
 
         if (isAnswerCorrect === true) {
-            setSpeechBubbleMessage("Goed gedaan!");
+            setSpeechBubbleParam("Goed gedaan!");
             setConsecCorrectAnswers(consecCorrectAnswers + 1);
 
             if (consecCorrectAnswers + 1 === quizData.length) {
@@ -110,7 +110,7 @@ export default function Quiz({
                 }, 3000);
             }
         } else {
-            setSpeechBubbleMessage("Volgende keer beter!");
+            setSpeechBubbleParam("Volgende keer beter!");
             setConsecCorrectAnswers(0);
         }
     };
@@ -192,8 +192,8 @@ export default function Quiz({
     };
 
     const onProceedButtonClick = () => {
-        if (speechBubbleMessage) {
-            setSpeechBubbleMessage("");
+        if (speechBubbleParam !== SpeechBubbleParam.OFF) {
+            setSpeechBubbleParam(SpeechBubbleParam.OFF);
         }
         goToNextQuestion();
     };
@@ -212,7 +212,10 @@ export default function Quiz({
     };
 
     const getTipButtonDisabledState = () => {
-        if (gamePhase !== GamePhase.SELECTION || speechBubbleMessage) {
+        if (
+            gamePhase !== GamePhase.SELECTION ||
+            speechBubbleParam !== SpeechBubbleParam.OFF
+        ) {
             return true;
         } else {
             return false;
@@ -238,8 +241,8 @@ export default function Quiz({
                 <Avatar />
                 <SpeechBubble
                     location={SpeechBubbleLocation.QUIZ}
-                    message={speechBubbleMessage}
-                    setMessage={setSpeechBubbleMessage}
+                    param={speechBubbleParam}
+                    setParam={setSpeechBubbleParam}
                 />
             </div>
 
@@ -306,7 +309,9 @@ export default function Quiz({
                                     " " +
                                     styles.bigButton__white
                                 }
-                                onClick={() => setSpeechBubbleMessage(TIP)}
+                                onClick={() =>
+                                    setSpeechBubbleParam(SpeechBubbleParam.TIP)
+                                }
                             >
                                 Geef me een tip...
                             </button>

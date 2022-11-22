@@ -1,52 +1,38 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { speechBubbleVariant } from "../styles/FramerMotionVariants";
-import { SpeechBubbleLocation, TIP } from "../interfaces/enums";
+import { SpeechBubbleLocation, SpeechBubbleParam } from "../interfaces/enums";
 import styles from "../styles/SpeechBubble.module.scss";
 
 const SPEECH_BUBBLE_DURATION_MS = 7500;
 
 interface AppProps {
     location: SpeechBubbleLocation;
-    message: string;
-    setMessage: Function;
+    param: SpeechBubbleParam;
+    setParam: Function;
 }
 
-export default function SpeechBubble({
-    location,
-    message,
-    setMessage,
-}: AppProps) {
-    //#region VARIABLES
-
-    const [active, setActive] = useState(false);
+export default function SpeechBubble({ location, param, setParam }: AppProps) {
     const [content, setContent] = useState("");
-    //#endregion
-
-    //#region useEffects
 
     // set content of the speech bubble
     useEffect(() => {
-        // check that message has a value and that content isn't already being
-        // displayed
-        if (message && !content) {
+        // don't load new content when there already is content
+        if (param !== SpeechBubbleParam.OFF && !content) {
             loadContent();
         }
-    }, [message]);
+    }, [param]);
 
     const loadContent = async () => {
-        if (message === TIP) {
+        if (param === SpeechBubbleParam.TIP) {
             const randomAdvice = await getRandomAdvice();
             setContent(randomAdvice);
         } else {
-            setContent(message);
+            setContent(param);
         }
 
-        setActive(true);
-
         setTimeout(() => {
-            setActive(false);
-            setMessage("");
+            setParam(SpeechBubbleParam.OFF);
             setContent("");
         }, SPEECH_BUBBLE_DURATION_MS);
     };
@@ -57,11 +43,10 @@ export default function SpeechBubble({
 
         return randomAdviceObj.slip.advice;
     };
-    //#endregion
 
     return (
         <AnimatePresence>
-            {message && content && (
+            {param !== SpeechBubbleParam.OFF && content && (
                 <motion.div
                     className={styles.container + " " + styles[location]}
                     key="speechBubble"

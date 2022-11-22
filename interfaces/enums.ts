@@ -10,5 +10,9 @@ export enum SpeechBubbleLocation {
     QUIZ = "quiz",
 }
 
-export const TIP = "tip";
+export enum SpeechBubbleParam {
+    TIP = "tip",
+    OFF = "",
+}
+
 export const PRE_SELECTION_PHASE_DURATION_MS = 5000;
