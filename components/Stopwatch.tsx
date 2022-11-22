@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { motion, Variants } from "framer-motion";
+import { dropInShrinkOutVariant } from "../styles/FramerMotionVariants";
 import {
     GamePhase,
     PRE_SELECTION_PHASE_DURATION_MS,
@@ -9,14 +10,9 @@ import styles from "../styles/Stopwatch.module.scss";
 interface AppProps {
     gamePhase: GamePhase;
     secondsRemaining: number;
-    animationProps: Variants;
 }
 
-export default function Stopwatch({
-    gamePhase,
-    secondsRemaining,
-    animationProps,
-}: AppProps) {
+export default function Stopwatch({ gamePhase, secondsRemaining }: AppProps) {
     //#region useEffects
 
     // set custom css variables programmatically
@@ -48,7 +44,7 @@ export default function Stopwatch({
     return (
         <motion.div
             className={getStopwatchStyling()}
-            variants={animationProps}
+            variants={dropInShrinkOutVariant as Variants}
             initial="initial"
             animate="animate"
             exit="exit"

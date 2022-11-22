@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
+import { foldInOutVariant } from "../styles/FramerMotionVariants";
 import styles from "../styles/ButtonsContainer.module.scss";
 
 interface AppProps {
@@ -6,26 +7,11 @@ interface AppProps {
 }
 
 export default function ButtonsContainer({ children }: AppProps) {
-    const buttonsContainerVariant = {
-        initial: {
-            scaleY: 0,
-            opacity: 0,
-        },
-        animate: {
-            scaleY: 1,
-            opacity: 1,
-        },
-        exit: {
-            scaleX: 0,
-            opacity: 0,
-        },
-    };
-
     return (
         <motion.div
             className={styles.buttonsContainer}
             layout
-            variants={buttonsContainerVariant}
+            variants={foldInOutVariant as Variants}
             initial="initial"
             animate="animate"
             exit="exit"

@@ -1,4 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import { blinkVariant } from "../styles/FramerMotionVariants";
 import styles from "../styles/Question.module.scss";
 
 interface AppProps {
@@ -9,11 +10,12 @@ export default function Question({ question }: AppProps) {
     return (
         <AnimatePresence mode="wait">
             <motion.h1
-                key={question}
-                initial={{ scaleY: 0, opacity: 0 }}
-                animate={{ scaleY: 1, opacity: 1 }}
-                exit={{ scaleY: 0, opacity: 0 }}
                 className={styles.question}
+                key={question}
+                variants={blinkVariant as Variants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
             >
                 {question}
             </motion.h1>

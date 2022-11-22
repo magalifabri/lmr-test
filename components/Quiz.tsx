@@ -229,34 +229,6 @@ export default function Quiz({
     };
     //#endregion
 
-    //#region FRAMER MOTION VARIANTS
-
-    const timerVariant = {
-        initial: {
-            y: -100,
-            opacity: 0,
-        },
-        animate: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                duration: 0.5,
-                delay: 0.5,
-                type: "spring",
-                bounce: 0.5,
-            },
-        },
-        exit: {
-            scale: 0,
-            opacity: 0,
-            transition: {
-                duration: 1,
-            },
-        },
-    };
-
-    //#endregion
-
     return (
         <div className={styles.container}>
             {/* avatar container present on mobile only */}
@@ -275,16 +247,13 @@ export default function Quiz({
                 <div className={styles.timerContainer}>
                     <AnimatePresence>
                         {gamePhase === GamePhase.PRE_SELECTION ? (
-                            <CountdownBar
-                                key="CountdownBar" // required by AnimatePresence
-                                animationProps={timerVariant}
-                            />
+                            // key required by AnimatePresence
+                            <CountdownBar key="CountdownBar" />
                         ) : (
                             <Stopwatch
                                 gamePhase={gamePhase}
                                 secondsRemaining={secondsRemaining}
                                 key="Stopwatch"
-                                animationProps={timerVariant}
                             />
                         )}
                     </AnimatePresence>

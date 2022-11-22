@@ -1,16 +1,12 @@
 import { motion, Variants } from "framer-motion";
-
+import { dropInShrinkOutVariant } from "../styles/FramerMotionVariants";
 import styles from "../styles/CountdownBar.module.scss";
 
-interface AppProps {
-    animationProps: Variants;
-}
-
-export default function CountdownBar({ animationProps }: AppProps) {
+export default function CountdownBar() {
     return (
         <motion.div
             className={styles.countdownBar}
-            variants={animationProps}
+            variants={dropInShrinkOutVariant as Variants}
             initial="initial"
             animate="animate"
             exit="exit"
