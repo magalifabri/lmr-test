@@ -214,6 +214,17 @@ export default function Quiz({
             return false;
         }
     };
+
+    const getProceedButtonText = () => {
+        const isLastQuestion =
+            quizData[quizData.length - 1].question === question.question;
+
+        if (isLastQuestion) {
+            return "Opnieuw";
+        } else {
+            return "Doorgaan";
+        }
+    };
     //#endregion
 
     //#region FRAMER MOTION VARIANTS
@@ -328,7 +339,7 @@ export default function Quiz({
                                 }
                                 onClick={() => onProceedButtonClick()}
                             >
-                                Doorgaan
+                                {getProceedButtonText()}
                             </button>
                         </motion.div>
                     ) : (
