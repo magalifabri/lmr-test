@@ -16,6 +16,7 @@ import {
 } from "../interfaces/enums";
 import styles from "../styles/Quiz.module.scss";
 import optionsStyles from "../styles/Options.module.scss";
+import Question from "./Question";
 
 interface AppProps {
     quizData: Array<IQuizDataItem>;
@@ -302,17 +303,7 @@ export default function Quiz({
                     </AnimatePresence>
                 </div>
 
-                <AnimatePresence mode="wait">
-                    <motion.h1
-                        key={question.question}
-                        initial={{ scaleY: 0, opacity: 0 }}
-                        animate={{ scaleY: 1, opacity: 1 }}
-                        exit={{ scaleY: 0, opacity: 0 }}
-                        className={styles.question}
-                    >
-                        {question.question}
-                    </motion.h1>
-                </AnimatePresence>
+                <Question question={question.question} />
 
                 <Options
                     question={question}

@@ -1,0 +1,8 @@
+@use "shared";
+
+.question {
+    max-width: 35rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: shared.$white;
+}
