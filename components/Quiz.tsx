@@ -73,7 +73,6 @@ export default function Quiz({
 
                 setSecondsRemaining(seconds);
 
-                // end of selection phase
                 if (seconds === 0) {
                     clearInterval(interval);
                     endSelectionPhase();
@@ -84,6 +83,8 @@ export default function Quiz({
         }
     }, [gamePhase]);
     //#endregion
+
+    //#region GENERAL FUNCTIONS
 
     const endSelectionPhase = () => {
         setGamePhase(GamePhase.POST_SELECTION);
@@ -180,6 +181,7 @@ export default function Quiz({
         setSecondsRemaining(quizData[nextQuestionIndex].time_limit_s);
         setNumSelected(0);
     };
+    //#endregion
 
     //#region UI HANDLERS
 
