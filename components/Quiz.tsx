@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Avatar from "./Avatar";
 import Gif from "./Gif";
 import SpeechBubble from "./SpeechBubble";
