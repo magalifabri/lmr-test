@@ -289,7 +289,7 @@ export default function Quiz({
                     </AnimatePresence>
                 </div>
 
-                <AnimatePresence exitBeforeEnter>
+                <AnimatePresence mode="wait">
                     <motion.h1
                         key={question.question}
                         initial={{ scaleY: 0, opacity: 0 }}
@@ -309,7 +309,7 @@ export default function Quiz({
                     onAnswerSelect={onAnswerSelect}
                 />
 
-                <AnimatePresence exitBeforeEnter initial={false}>
+                <AnimatePresence mode="wait" initial={false}>
                     {gamePhase === GamePhase.POST_SELECTION ? (
                         <motion.div
                             className={styles.buttonsContainer}
