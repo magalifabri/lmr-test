@@ -192,6 +192,9 @@ export default function Quiz({
     };
 
     const onProceedButtonClick = () => {
+        if (speechBubbleMessage) {
+            setSpeechBubbleMessage("");
+        }
         goToNextQuestion();
     };
     //#endregion

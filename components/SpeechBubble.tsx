@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { speechBubbleVariant } from "../styles/FramerMotionVariants";
 import { SpeechBubbleLocation, TIP } from "../interfaces/enums";
 import styles from "../styles/SpeechBubble.module.scss";
 
@@ -22,14 +24,6 @@ export default function SpeechBubble({
     //#endregion
 
     //#region useEffects
-
-    // set custom css variables programmatically
-    useEffect(() => {
-        document.documentElement.style.setProperty(
-            "--speechBubbleDurationMs",
-            `${SPEECH_BUBBLE_DURATION_MS}ms`
-        );
-    }, []);
 
     // set content of the speech bubble
     useEffect(() => {
@@ -65,18 +59,21 @@ export default function SpeechBubble({
     };
     //#endregion
 
-    //#region RENDER LOGIC
-
-    const getContainerStyling = () => {
-        let styling: string = styles.container + " " + styles[location];
-
-        if (active) {
-            styling += " " + styles.active;
-        }
-
-        return styling;
-    };
-    //#endregion
-
-    return <div className={getContainerStyling()}>{content}</div>;
+    return (
+        <AnimatePresence>
+            {message && content && (
+                <motion.div
+                    className={styles.container + " " + styles[location]}
+                    key="speechBubble"
+                    variants={speechBubbleVariant}
+                    custom={location}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                >
+                    {content}
+                </motion.div>
+            )}
+        </AnimatePresence>
+    );
 }

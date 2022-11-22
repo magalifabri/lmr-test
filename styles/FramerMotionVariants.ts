@@ -1,4 +1,5 @@
-import { MotionProps } from "framer-motion";
+import { MotionProps, AnimationProps } from "framer-motion";
+import { SpeechBubbleLocation } from "../interfaces/enums";
 
 export const dropInShrinkOutVariant: MotionProps = {
     initial: {
@@ -52,4 +53,28 @@ export const blinkVariant: MotionProps = {
         scaleY: 0,
         opacity: 0,
     },
+};
+
+export const speechBubbleVariant = {
+    initial: (location: string) => ({
+        opacity: 0,
+        scale: 0.5,
+        x: location === SpeechBubbleLocation.SIDEBAR ? "-50%" : 0,
+        originX: location === SpeechBubbleLocation.SIDEBAR ? "50%" : 0,
+        originY: 0,
+    }),
+    animate: (location: string) => ({
+        opacity: 1,
+        scale: 1,
+        x: location === SpeechBubbleLocation.SIDEBAR ? "-50%" : 0,
+        transition: {
+            type: "spring",
+            bounce: 0.5,
+        },
+    }),
+    exit: (location: string) => ({
+        scale: 0,
+        opacity: 0,
+        x: location === SpeechBubbleLocation.SIDEBAR ? "-50%" : 0,
+    }),
 };

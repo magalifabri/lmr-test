@@ -1,54 +1,25 @@
 @use "shared";
 
-@mixin lifetime($transform) {
-    @keyframes lifetime {
-        0% {
-            opacity: 0;
-            transform: $transform scale(0.5);
-        }
-        5% {
-            opacity: 1;
-            transform: $transform scale(1.05);
-            animation-timing-function: ease-out;
-        }
-        7%,
-        90% {
-            opacity: 1;
-            transform: $transform scale(1);
-        }
-        100% {
-            opacity: 0;
-            transform: $transform scale(0.75);
-        }
-    }
-}
-
 .container {
-    display: none;
+    position: relative;
+    width: max-content;
+    max-width: 15rem;
+    padding: 0.5rem 0.75rem;
 
-    &.active {
-        position: relative;
-        width: max-content;
-        max-width: 15rem;
-        padding: 0.5rem 0.75rem;
+    border-radius: shared.$borderRadius;
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
 
-        border-radius: shared.$borderRadius;
-        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
-
-        // triangle to make it look like a speech bubble
-        &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            border: 0.5rem solid transparent;
-        }
-
-        animation: lifetime var(--speechBubbleDurationMs, 5000ms) ease both;
+    // triangle to make it look like a speech bubble
+    &::after {
+        content: "";
+        position: absolute;
+        border: 0.5rem solid transparent;
     }
 
     // only show speech bubble on mobile in quiz or on desktop in sidebar
+    // mobile
     @media (max-width: shared.$mobileBreakpoint) {
-        &.quiz.active {
+        &.quiz {
             display: inline-block;
             left: 4rem;
             top: -1.75rem;
@@ -61,13 +32,12 @@
                 transform: translateX(-95%);
                 border-right: 0.5rem solid shared.$white;
             }
-
-            transform-origin: 0 0;
-            @include lifetime("");
         }
     }
+
+    // desktop
     @media not all and (max-width: shared.$mobileBreakpoint) {
-        &.sidebar.active {
+        &.sidebar {
             display: inline-block;
             top: 0.5rem;
             left: 50%;
@@ -78,13 +48,11 @@
             color: shared.$white;
 
             &::after {
-                border-bottom: 0.5rem solid shared.$primaryLighter1;
+                top: 0;
                 left: 50%;
+                border-bottom: 0.5rem solid shared.$primaryLighter1;
                 transform: translateX(-50%) translateY(-95%);
             }
-
-            transform-origin: 50% 0;
-            @include lifetime(translateX(-50%));
         }
     }
 }
