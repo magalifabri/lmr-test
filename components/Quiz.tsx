@@ -102,7 +102,7 @@ export default function Quiz({
             setSpeechBubbleMessage("Goed gedaan!");
             setConsecCorrectAnswers(consecCorrectAnswers + 1);
 
-            if (consecCorrectAnswers + 3 === quizData.length) {
+            if (consecCorrectAnswers + 1 === quizData.length) {
                 setShowGif(true);
                 setTimeout(() => {
                     setShowGif(false);
