@@ -56,6 +56,8 @@ export default function Quiz({
     useEffect(() => {
         if (gamePhase === GamePhase.PRE_SELECTION) {
             setPreSelectionPhaseTimer();
+        } else if (gamePhase === GamePhase.SELECTION) {
+            countDownSecondsRemaining();
         }
     }, [gamePhase]);
 
@@ -65,25 +67,22 @@ export default function Quiz({
         }, PRE_SELECTION_PHASE_DURATION_MS);
     };
 
-    // count down selection phase time remaining
-    useEffect(() => {
-        if (gamePhase === GamePhase.SELECTION) {
-            let seconds = question.time_limit_s;
+    const countDownSecondsRemaining = () => {
+        let seconds = question.time_limit_s;
 
-            const interval = setInterval(() => {
-                seconds--;
+        const interval = setInterval(() => {
+            seconds--;
 
-                setSecondsRemaining(seconds);
+            setSecondsRemaining(seconds);
 
-                if (seconds === 0) {
-                    clearInterval(interval);
-                    endSelectionPhase();
-                }
-            }, 1000);
+            if (seconds === 0) {
+                clearInterval(interval);
+                endSelectionPhase();
+            }
+        }, 1000);
 
-            setIntervalId(interval);
-        }
-    }, [gamePhase]);
+        setIntervalId(interval);
+    };
     //#endregion
 
     //#region GENERAL FUNCTIONS
