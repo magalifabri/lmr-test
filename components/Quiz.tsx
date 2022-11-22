@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Avatar from "./Avatar";
+import Gif from "./Gif";
 import SpeechBubble from "./SpeechBubble";
 import CountdownBar from "./CountdownBar";
 import Stopwatch from "./Stopwatch";
@@ -45,6 +46,7 @@ export default function Quiz({
         question.time_limit_s
     );
     const [consecCorrectAnswers, setConsecCorrectAnswers] = useState(0);
+    const [showGif, setShowGif] = useState(false);
     //#endregion
 
     //#region useEffects
@@ -98,6 +100,13 @@ export default function Quiz({
         if (isAnswerCorrect === true) {
             setSpeechBubbleMessage("Goed gedaan!");
             setConsecCorrectAnswers(consecCorrectAnswers + 1);
+
+            if (consecCorrectAnswers + 3 === quizData.length) {
+                setShowGif(true);
+                setTimeout(() => {
+                    setShowGif(false);
+                }, 3000);
+            }
         } else {
             setSpeechBubbleMessage("Volgende keer beter!");
             setConsecCorrectAnswers(0);
@@ -288,6 +297,8 @@ export default function Quiz({
                     setMessage={setSpeechBubbleMessage}
                 />
             </div>
+
+            <Gif showGif={showGif} />
 
             <div className={styles.innerContainer}>
                 <div className={styles.timerContainer}>

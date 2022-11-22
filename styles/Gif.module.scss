@@ -1,0 +1,25 @@
+@use "shared";
+
+@mixin dimensions($width) {
+    height: calc($width * 0.5625);
+    width: $width;
+}
+
+.gif {
+    pointer-events: none;
+    position: fixed;
+    z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    @include dimensions(48vw);
+
+    @media only screen and (max-width: shared.$mobileBreakpoint) {
+        @include dimensions(80vw);
+    }
+
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+    background-color: black;
+    border-radius: 1rem;
+}
