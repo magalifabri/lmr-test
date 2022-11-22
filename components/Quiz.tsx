@@ -185,25 +185,6 @@ export default function Quiz({
 
     //#region UI HANDLERS
 
-    const onAnswerSelect = (answerUid: string) => {
-        const newButtonStyles = buttonStyles;
-
-        if (buttonStyles[answerUid].includes(optionsStyles.selected)) {
-            newButtonStyles[answerUid].splice(
-                buttonStyles[answerUid].indexOf(answerUid),
-                1
-            );
-
-            setButtonStyles({ ...newButtonStyles });
-            setNumSelected((prevState) => prevState - 1);
-        } else {
-            newButtonStyles[answerUid].push(optionsStyles.selected);
-
-            setButtonStyles({ ...newButtonStyles });
-            setNumSelected((prevState) => prevState + 1);
-        }
-    };
-
     const onReadyButtonClick = () => {
         clearInterval(intervalId);
         endSelectionPhase();
@@ -338,7 +319,7 @@ export default function Quiz({
                     buttonStyles={buttonStyles}
                     setButtonStyles={setButtonStyles}
                     gamePhase={gamePhase}
-                    onAnswerSelect={onAnswerSelect}
+                    setNumSelected={setNumSelected}
                 />
 
                 <AnimatePresence mode="wait" initial={false}>

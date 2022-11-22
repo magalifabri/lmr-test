@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { GamePhase } from "../interfaces/enums";
 import IButtonStyles from "../interfaces/IButtonStyles";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
@@ -9,7 +10,7 @@ interface AppProps {
     buttonStyles: IButtonStyles;
     setButtonStyles: Function;
     gamePhase: GamePhase;
-    onAnswerSelect: Function;
+    setNumSelected: Function;
 }
 
 export default function Options({
@@ -17,7 +18,7 @@ export default function Options({
     buttonStyles,
     setButtonStyles,
     gamePhase,
-    onAnswerSelect,
+    setNumSelected,
 }: AppProps) {
     //#region useEffects
 
@@ -41,6 +42,26 @@ export default function Options({
     };
     //#endregion
 
+    //#region UI HANDLERS
+
+    const onOptionClick = (answerUid: string) => {
+        const isOptionSelected = buttonStyles[answerUid].includes(
+            styles.selected
+        );
+        const newButtonStyles = buttonStyles;
+
+        if (isOptionSelected) {
+            newButtonStyles[answerUid].pop();
+            setNumSelected((prevState: number) => prevState - 1);
+        } else {
+            newButtonStyles[answerUid].push(styles.selected);
+            setNumSelected((prevState: number) => prevState + 1);
+        }
+
+        setButtonStyles({ ...newButtonStyles });
+    };
+    //#endregion
+
     //#region RENDER LOGIC
 
     const getOptionsStyling = () => {
@@ -58,20 +79,28 @@ export default function Options({
     //#endregion
 
     return (
-        <div className={getOptionsStyling()}>
-            {question.answers.map((answer) => (
-                <button
-                    className={buttonStyles[answer.uid]?.join(" ")}
-                    key={answer.uid}
-                    disabled={gamePhase !== GamePhase.SELECTION}
-                    id={answer.uid}
-                    onClick={(e) => {
-                        onAnswerSelect((e.target as HTMLElement).id);
-                    }}
-                >
-                    {answer.answer}
-                </button>
-            ))}
-        </div>
+        <AnimatePresence mode="wait">
+            <motion.div
+                className={getOptionsStyling()}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                key={question.question}
+            >
+                {question.answers.map((answer, i) => (
+                    <motion.button
+                        className={buttonStyles[answer.uid]?.join(" ")}
+                        key={answer.uid}
+                        disabled={gamePhase !== GamePhase.SELECTION}
+                        id={answer.uid}
+                        onClick={(e) => {
+                            onOptionClick((e.target as HTMLElement).id);
+                        }}
+                    >
+                        {answer.answer}
+                    </motion.button>
+                ))}
+            </motion.div>
+        </AnimatePresence>
     );
 }
