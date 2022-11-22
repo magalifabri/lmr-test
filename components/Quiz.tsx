@@ -5,7 +5,9 @@ import Gif from "./Gif";
 import SpeechBubble from "./SpeechBubble";
 import CountdownBar from "./CountdownBar";
 import Stopwatch from "./Stopwatch";
+import Question from "./Question";
 import Options from "./Options";
+import ButtonsContainer from "./ButtonsContainer";
 import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
 import {
@@ -16,7 +18,6 @@ import {
 } from "../interfaces/enums";
 import styles from "../styles/Quiz.module.scss";
 import optionsStyles from "../styles/Options.module.scss";
-import Question from "./Question";
 
 interface AppProps {
     quizData: Array<IQuizDataItem>;
@@ -254,20 +255,6 @@ export default function Quiz({
         },
     };
 
-    const buttonsContainerVariant = {
-        initial: {
-            scaleY: 0,
-            opacity: 0,
-        },
-        animate: {
-            scaleY: 1,
-            opacity: 1,
-        },
-        exit: {
-            scaleX: 0,
-            opacity: 0,
-        },
-    };
     //#endregion
 
     return (
@@ -315,15 +302,7 @@ export default function Quiz({
 
                 <AnimatePresence mode="wait" initial={false}>
                     {gamePhase === GamePhase.POST_SELECTION ? (
-                        <motion.div
-                            className={styles.buttonsContainer}
-                            key="buttons1"
-                            layout
-                            variants={buttonsContainerVariant}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                        >
+                        <ButtonsContainer key="buttons1">
                             <button
                                 className={
                                     styles.bigButton +
@@ -334,17 +313,9 @@ export default function Quiz({
                             >
                                 {getProceedButtonText()}
                             </button>
-                        </motion.div>
+                        </ButtonsContainer>
                     ) : (
-                        <motion.div
-                            className={styles.buttonsContainer}
-                            key="buttons2"
-                            layout
-                            variants={buttonsContainerVariant}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                        >
+                        <ButtonsContainer key="buttons2">
                             <button
                                 disabled={!numSelected}
                                 className={
@@ -368,7 +339,7 @@ export default function Quiz({
                             >
                                 Geef me een tip...
                             </button>
-                        </motion.div>
+                        </ButtonsContainer>
                     )}
                 </AnimatePresence>
             </div>
