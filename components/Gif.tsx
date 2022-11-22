@@ -7,20 +7,18 @@ interface AppProps {
 
 export default function Gif({ showGif }: AppProps) {
     return (
-        <>
-            <AnimatePresence>
-                {showGif && (
-                    <motion.iframe
-                        key="gif"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className={styles.gif}
-                        src="https://giphy.com/embed/kAUtsLfsEfqaJRwe80"
-                        frameBorder="0"
-                    ></motion.iframe>
-                )}
-            </AnimatePresence>
-        </>
+        <AnimatePresence>
+            {showGif && (
+                <motion.iframe
+                    key="gif"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className={styles.gif}
+                    src="https://giphy.com/embed/kAUtsLfsEfqaJRwe80"
+                    frameBorder="0"
+                ></motion.iframe>
+            )}
+        </AnimatePresence>
     );
 }
