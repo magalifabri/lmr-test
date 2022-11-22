@@ -44,6 +44,7 @@ export default function Quiz({
     const [secondsRemaining, setSecondsRemaining] = useState(
         question.time_limit_s
     );
+    const [consecCorrectAnswers, setConsecCorrectAnswers] = useState(0);
     //#endregion
 
     //#region useEffects
@@ -86,17 +87,24 @@ export default function Quiz({
         setGamePhase(GamePhase.POST_SELECTION);
 
         const [newButtonStyles, numCorrectlySelected, numIncorrectlySelected] =
-            checkAnswers();
+            processSelectedOptions();
         setButtonStyles({ ...newButtonStyles });
 
-        const speechBubbleMessage = selectSpeechBubbleMessage(
+        const isAnswerCorrect = checkIsAnswerCorrect(
             numCorrectlySelected,
             numIncorrectlySelected
         );
-        setSpeechBubbleMessage(speechBubbleMessage);
+
+        if (isAnswerCorrect === true) {
+            setSpeechBubbleMessage("Goed gedaan!");
+            setConsecCorrectAnswers(consecCorrectAnswers + 1);
+        } else {
+            setSpeechBubbleMessage("Volgende keer beter!");
+            setConsecCorrectAnswers(0);
+        }
     };
 
-    const checkAnswers = (): [IButtonStyles, number, number] => {
+    const processSelectedOptions = (): [IButtonStyles, number, number] => {
         const newButtonStyles = buttonStyles;
         let numCorrectlySelected = 0;
         let numIncorrectlySelected = 0;
@@ -127,7 +135,7 @@ export default function Quiz({
         return [newButtonStyles, numCorrectlySelected, numIncorrectlySelected];
     };
 
-    const selectSpeechBubbleMessage = (
+    const checkIsAnswerCorrect = (
         numCorrectlySelected: number,
         numIncorrectlySelected: number
     ) => {
@@ -137,9 +145,9 @@ export default function Quiz({
             numCorrectOptions === numCorrectlySelected &&
             !numIncorrectlySelected
         ) {
-            return "Goed gedaan!";
+            return true;
         } else {
-            return "Volgende keer beter!";
+            return false;
         }
     };
 
