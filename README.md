@@ -26,14 +26,8 @@ Random advice given as hints from [Advice Slip JSON API](https://api.adviceslip.
 
 ## Screenshots
 
-<figure>
-<img src="public/images/screenshot_desktop.webp" alt="screenshot on desktop"/>    
-<figcaption>On desktop</figcaption>
-</figure>
+<img src="public/images/screenshot_desktop.webp" alt="screenshot on desktop"/>
 
 <br/>
 
-<figure>
 <img src="public/images/screenshot_mobile.webp" height="500" alt="screenshot on mobile"/>
-<figcaption>On mobile</figcaption>
-</figure>
