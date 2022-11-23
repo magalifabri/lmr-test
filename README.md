@@ -4,6 +4,14 @@
 
 <br/>
 
+## Tech
+
+Built with [Next.js](https://nextjs.org/), using [TypeScript](https://www.typescriptlang.org/), [Sass](https://sass-lang.com/) and [Framer Motion](https://www.framer.com/motion/) as core building blocks. And deployed with [Vercel](https://vercel.com/home).
+
+Random advice given as hints from [Advice Slip JSON API](https://api.adviceslip.com/).
+
+<br/>
+
 ## Running for development
 
 To set up the app for local development, follow these steps:
@@ -13,14 +21,6 @@ To set up the app for local development, follow these steps:
 3. install the dependancies: `npm i`
 4. run the app locally: `npm run dev`
 5. go to http://localhost:3000 in your browser to view the app
-
-<br/>
-
-## Tech
-
-Built with [Next.js](https://nextjs.org/), using [TypeScript](https://www.typescriptlang.org/), [Sass](https://sass-lang.com/) and [Framer Motion](https://www.framer.com/motion/) as core building blocks. And deployed with [Vercel](https://vercel.com/home).
-
-Random advice given as hints from [Advice Slip JSON API](https://api.adviceslip.com/)
 
 <br/>
 
