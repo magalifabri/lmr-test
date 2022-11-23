@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GamePhase } from "../interfaces/enums";
-import IButtonStyles from "../interfaces/IButtonStyles";
-import IQuizDataItem from "../interfaces/IQuizDataItem";
+import { GamePhase } from "../data_structures/enums";
+import IButtonStyles from "../data_structures/IButtonStyles";
+import IQuizDataItem from "../data_structures/IQuizDataItem";
 import styles from "../styles/Options.module.scss";
 
 interface AppProps {

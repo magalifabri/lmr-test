@@ -4,15 +4,15 @@ import { v4 as uuid } from "uuid";
 import Sidebar from "../components/Sidebar";
 import Quiz from "../components/Quiz";
 import MenuButton from "../components/MenuButton";
-import IQuizDataItem from "../interfaces/IQuizDataItem";
-import IAnswer from "../interfaces/IAnswer";
+import IQuizDataItem from "../data_structures/IQuizDataItem";
+import IAnswer from "../data_structures/IAnswer";
 import styles from "../styles/Home.module.scss";
 import SpeechBubble from "../components/SpeechBubble";
 import {
     GamePhase,
     SpeechBubbleLocation,
     SpeechBubbleParam,
-} from "../interfaces/enums";
+} from "../data_structures/enums";
 
 // fetch quiz data from API
 export async function getServerSideProps() {

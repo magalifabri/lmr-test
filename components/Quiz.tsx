@@ -8,13 +8,13 @@ import Stopwatch from "./Stopwatch";
 import Question from "./Question";
 import Options from "./Options";
 import ButtonsContainer from "./ButtonsContainer";
-import IQuizDataItem from "../interfaces/IQuizDataItem";
-import IButtonStyles from "../interfaces/IButtonStyles";
+import IQuizDataItem from "../data_structures/IQuizDataItem";
+import IButtonStyles from "../data_structures/IButtonStyles";
 import {
     GamePhase,
     SpeechBubbleLocation,
     SpeechBubbleParam,
-} from "../interfaces/enums";
+} from "../data_structures/enums";
 import styles from "../styles/Quiz.module.scss";
 import optionsStyles from "../styles/Options.module.scss";
 

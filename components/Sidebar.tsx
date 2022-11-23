@@ -4,7 +4,7 @@ import Level from "./Level";
 import Description from "./Description";
 import StartButton from "./StartButton";
 import Navigation from "./Navigation";
-import { GamePhase } from "../interfaces/enums";
+import { GamePhase } from "../data_structures/enums";
 import styles from "../styles/Sidebar.module.scss";
 
 interface AppProps {

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { speechBubbleVariant } from "../styles/FramerMotionVariants";
-import { SpeechBubbleLocation, SpeechBubbleParam } from "../interfaces/enums";
+import {
+    SpeechBubbleLocation,
+    SpeechBubbleParam,
+} from "../data_structures/enums";
 import styles from "../styles/SpeechBubble.module.scss";
 
 const SPEECH_BUBBLE_DURATION_MS = 7500;

@@ -1,5 +1,5 @@
 import { MotionProps } from "framer-motion";
-import { SpeechBubbleLocation } from "../interfaces/enums";
+import { SpeechBubbleLocation } from "../data_structures/enums";
 
 export const dropInShrinkOutVariant: MotionProps = {
     initial: {

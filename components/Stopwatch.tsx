@@ -1,6 +1,6 @@
 import { motion, Variants } from "framer-motion";
 import { dropInShrinkOutVariant } from "../styles/FramerMotionVariants";
-import { GamePhase } from "../interfaces/enums";
+import { GamePhase } from "../data_structures/enums";
 import styles from "../styles/Stopwatch.module.scss";
 
 interface AppProps {
