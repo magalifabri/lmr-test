@@ -2,6 +2,7 @@ import Avatar from "./Avatar";
 import Timer from "./Timer";
 import Level from "./Level";
 import Description from "./Description";
+import StartButton from "./StartButton";
 import Navigation from "./Navigation";
 import { GamePhase } from "../interfaces/enums";
 import styles from "../styles/Sidebar.module.scss";
@@ -30,16 +31,6 @@ export default function Sidebar({
     //#endregion
 
     //#region RENDER LOGIC
-
-    const getStartButtonStyling = () => {
-        let styling = styles.startButton;
-
-        if (gamePhase === GamePhase.GETTING_READY) {
-            styling += " " + styles.active;
-        }
-
-        return styling;
-    };
 
     const getContainerStyling = () => {
         let styling = styles.container;
@@ -70,14 +61,10 @@ export default function Sidebar({
                 <div className={styles.content}>
                     <Description />
 
-                    <button
-                        onClick={() => {
-                            onStartButtonClick();
-                        }}
-                        className={getStartButtonStyling()}
-                    >
-                        Aan de slag!
-                    </button>
+                    <StartButton
+                        condition={gamePhase === GamePhase.GETTING_READY}
+                        onStartButtonClick={onStartButtonClick}
+                    />
                 </div>
             </div>
 

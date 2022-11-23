@@ -1,4 +1,4 @@
-import { MotionProps, AnimationProps } from "framer-motion";
+import { MotionProps } from "framer-motion";
 import { SpeechBubbleLocation } from "../interfaces/enums";
 
 export const dropInShrinkOutVariant: MotionProps = {
@@ -77,4 +77,17 @@ export const speechBubbleVariant = {
         opacity: 0,
         x: location === SpeechBubbleLocation.SIDEBAR ? "-50%" : 0,
     }),
+};
+
+export const jiggleAnimSquashOutVariant: MotionProps = {
+    animate: {
+        scaleX: [1, 0.9, 1.1, 0.95, 1],
+        scaleY: [1, 1.1, 0.9, 1.05, 1],
+        transition: {
+            duration: 1,
+            times: [0, 0.125, 0.25, 0.5, 0.75],
+            repeat: Infinity,
+        },
+    },
+    exit: { scaleX: 1.5, scaleY: 0, opacity: 0 },
 };
