@@ -43,8 +43,11 @@ export default function Home({ quizData }: AppProps) {
     return (
         <>
             <Head>
-                <title>page title</title>
-                <meta name="description" content="page description" />
+                <title>Studiekeuzequiz: De Fabriek</title>
+                <meta
+                    name="description"
+                    content="Speel de spannende studiekeuzequiz en leer waar jouw passie ligt!"
+                />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
