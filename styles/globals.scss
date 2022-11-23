@@ -9,12 +9,9 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
-    // TODO: remove after creating UI
-    // outline: 1px solid rgba(255, 0, 0, 1);
 }
 
-// TODO: remove after recreating UI
+// screenshot for recreating UI from design
 // html:before {
 //     content: "";
 //     // background: url("/images/quiz-active_answers.png");
@@ -37,13 +34,13 @@ body {
     flex: 1; // fill viewport width
     display: flex; // make children (= Home) fill viewport height
 
+    font-family: "FlandersArtSans", sans-serif;
+    background-color: shared.$primary;
+
     // desktop
     @media only screen and (min-width: calc(shared.$mobileBreakpoint + 1px)) {
         justify-content: center;
     }
-
-    font-family: "FlandersArtSans", sans-serif;
-    background-color: shared.$primary;
 
     // mobile
     @media only screen and (max-width: shared.$mobileBreakpoint) {
