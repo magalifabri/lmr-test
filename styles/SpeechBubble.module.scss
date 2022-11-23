@@ -1,6 +1,7 @@
 @use "shared";
 
 .container {
+    display: none;
     position: relative;
     width: max-content;
     max-width: 15rem;
