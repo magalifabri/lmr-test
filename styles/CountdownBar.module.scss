@@ -20,7 +20,7 @@
     &__fill {
         @include shared.progressBarFill;
 
-        animation: deplete var(--timeRemainingMs, 5000ms) linear both,
+        animation: deplete var(--preSelectionPhaseDuration, 5000ms) linear both,
             progressBarFillAnim 1.5s linear infinite;
 
         @keyframes deplete {

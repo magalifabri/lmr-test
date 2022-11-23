@@ -1,10 +1,6 @@
-import { useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 import { dropInShrinkOutVariant } from "../styles/FramerMotionVariants";
-import {
-    GamePhase,
-    PRE_SELECTION_PHASE_DURATION_MS,
-} from "../interfaces/enums";
+import { GamePhase } from "../interfaces/enums";
 import styles from "../styles/Stopwatch.module.scss";
 
 interface AppProps {
@@ -13,19 +9,6 @@ interface AppProps {
 }
 
 export default function Stopwatch({ gamePhase, secondsRemaining }: AppProps) {
-    //#region useEffects
-
-    // set custom css variables programmatically
-    useEffect(() => {
-        document.documentElement.style.setProperty(
-            "--timeRemainingMs",
-            `${PRE_SELECTION_PHASE_DURATION_MS}ms`
-        );
-    }, []);
-    //#endregion
-
-    //#region RENDER LOGIC
-
     const getStopwatchStyling = () => {
         let styling = styles.stopwatch;
 
@@ -39,7 +22,6 @@ export default function Stopwatch({ gamePhase, secondsRemaining }: AppProps) {
 
         return styling;
     };
-    //#endregion
 
     return (
         <motion.div

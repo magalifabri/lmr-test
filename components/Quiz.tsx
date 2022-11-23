@@ -12,12 +12,13 @@ import IQuizDataItem from "../interfaces/IQuizDataItem";
 import IButtonStyles from "../interfaces/IButtonStyles";
 import {
     GamePhase,
-    PRE_SELECTION_PHASE_DURATION_MS,
     SpeechBubbleLocation,
     SpeechBubbleParam,
 } from "../interfaces/enums";
 import styles from "../styles/Quiz.module.scss";
 import optionsStyles from "../styles/Options.module.scss";
+
+const PRE_SELECTION_PHASE_DURATION_MS = 5000;
 
 interface AppProps {
     quizData: Array<IQuizDataItem>;
@@ -252,8 +253,10 @@ export default function Quiz({
                 <div className={styles.timerContainer}>
                     <AnimatePresence>
                         {gamePhase === GamePhase.PRE_SELECTION ? (
-                            // key required by AnimatePresence
-                            <CountdownBar key="CountdownBar" />
+                            <CountdownBar
+                                duration={PRE_SELECTION_PHASE_DURATION_MS}
+                                key="CountdownBar" // key by AnimatePresence
+                            />
                         ) : (
                             <Stopwatch
                                 gamePhase={gamePhase}

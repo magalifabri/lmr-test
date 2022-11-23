@@ -1,8 +1,21 @@
+import { useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 import { dropInShrinkOutVariant } from "../styles/FramerMotionVariants";
 import styles from "../styles/CountdownBar.module.scss";
 
-export default function CountdownBar() {
+interface AppProps {
+    duration: number;
+}
+
+export default function CountdownBar({ duration }: AppProps) {
+    // set custom css variables programmatically
+    useEffect(() => {
+        document.documentElement.style.setProperty(
+            "--preSelectionPhaseDuration",
+            `${duration}ms`
+        );
+    }, []);
+
     return (
         <motion.div
             className={styles.countdownBar}
